@@ -1,0 +1,12 @@
+MVC:  
+	C:
+	 - baseCrtl: 
+	    loadModel(include,require)
+	    loadView(inclide,require)
+	M:
+	 - baseModel:
+	    connectDatabase(extend core/database)
+	    method
+	 
+	    
+	V:

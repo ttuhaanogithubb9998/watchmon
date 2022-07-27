@@ -1,0 +1,11 @@
+RewriteEngine on
+
+RewriteBase /
+
+
+RewriteRule ^(.*\.css|.*\.js|.*\.png|.*\.jpg|.*\.gif|.*\.woff2|.*\.woff|.*\.ttf|robots\.txt) - [L]
+RewriteRule ^(admin/).*$|^(admin) admin.php [QSA,L]
+RewriteRule ^.*$ index.php [QSA,L]
+
+
+
