@@ -7,6 +7,7 @@ class ProductController extends BaseController
         $this->loadModel('Product');
         $this->loadModel("ProductCategory");
         $this->loadModel("SubImage");
+        $this->loadModel("Category");
         $this->productModel = new Product();
     }
 
@@ -16,6 +17,39 @@ class ProductController extends BaseController
      */
 
     /***/
+
+    function index(){
+        
+        $subImageModel = new SubImage();
+        $productCategoryModel = new ProductCategory();
+        $categoryModel = new Category();
+        
+        // get product
+        $products = $this->productModel->getAll();
+        
+        for($i = 0; $i < count($products); $i++){
+            // get list image
+            $arrImg = $subImageModel->getImages($products[$i]['id']);
+
+            //get list category 
+            $productCategories = $productCategoryModel->getListByProduct($products[$i]['id']);
+            $categories =[];
+            foreach($productCategories as $productCategory){
+                $category = $categoryModel->getCategory($productCategory['categoryId']);
+
+                if($category){
+                    $categories[] = $category;
+                } 
+            }   
+
+            // push in Product
+            $products[$i] = array_merge($products[$i],['images'=>$arrImg],['categories'=>$categories]);
+            
+        }
+        return  $this->view('Product/index.php', [
+            'products' => $products
+        ]);
+    }
 
     function show($categoryId)
     {
@@ -45,11 +79,12 @@ class ProductController extends BaseController
         ]);
     }
 
-    function getFromCreate($error = '')
+    function getFromCreate($message = '',$type = "primary")
     {
 
         $this->view('Product/create.php', [
-            "error" => $error
+            "message" => $message,
+            "type" => $type
         ]);
     }
 
@@ -76,9 +111,7 @@ class ProductController extends BaseController
 
         foreach ($files['size'] as $size) {
             if ($mb = number_format($size / 1048576, 2) > 1) {
-                return $this->view('Product/create.php', [
-                    'error' => "Kích thước file không vượt quá 1mb ($mb)MB"
-                ]);
+                return $this->getFromCreate("Kích thước file không vượt quá 1mb ($mb)MB","danger");
             }
         }
 
@@ -104,7 +137,7 @@ class ProductController extends BaseController
                 }
 
             }
+            $this->getFromCreate("Thành công!");
         }
-        die();
     }
 }

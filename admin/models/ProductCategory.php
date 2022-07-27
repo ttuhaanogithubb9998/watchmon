@@ -10,7 +10,7 @@
     }
 
     function getListByProduct($productId){
-        return $this->search(["*"],['productId',[$productId]]);
+        return $this->search(["*"],['productId' => [$productId,'=']]);
     }
 
     function getListByCategory($categoryId){
