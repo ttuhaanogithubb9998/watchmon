@@ -74,8 +74,6 @@ class ProductController extends BaseController
     function create($name, $description, $price, $priceSale, $stock, $state, $files)
     {
 
-        
-
         foreach ($files['size'] as $size) {
             if ($mb = number_format($size / 1048576, 2) > 1) {
                 return $this->view('Product/create.php', [
@@ -89,10 +87,24 @@ class ProductController extends BaseController
 
         if ($product !== false) {
             $productId = $product['id'];
-            $subImage = new SubImage();
-            $pathUpload = ROOT . '/upload/image/product';
+            $subImageModel = new SubImage();
+            $pathUpload = ROOT . '/upload/image/product/';
+            $length = count($files['name']) ; 
+            for($i = 0; $i < $length; $i++) {
 
-            var_dump($files);
+                $extensionImg = strtolower(pathinfo($files['name'][$i], PATHINFO_EXTENSION));
+                $randomNameImg  = md5((new DateTime())->format('Y-m-d H:i:s.u'));
+                $fileName = $randomNameImg .'.'. $extensionImg;
+                $targetPath = $pathUpload.$fileName;
+                $loaded = move_uploaded_file($files['tmp_name'][$i], $targetPath);
+                
+                var_dump($loaded);
+                if($loaded){
+                    $subImageModel->addImage($productId,$fileName);
+                }
+
+            }
         }
+        die();
     }
 }
