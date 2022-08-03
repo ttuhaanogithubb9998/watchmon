@@ -1,4 +1,1 @@
-<?php 
-foreach ($users as $user){
-    echo $user['password'];
-}
+<a href="<?php echo BASE_URL?>user/logout"> đăng xuất</a>

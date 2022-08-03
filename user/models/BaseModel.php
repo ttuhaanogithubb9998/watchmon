@@ -15,10 +15,10 @@ class BaseModel extends Database
      * Lấy tất cả 
      * @param array $selects = [columnName1,columnName2,...] 
      * Lấy các cột tương ứng nếu không truyền lất tất cả. 
-     * @param array $oderBy = [columnName => typeOderBy,...] . Sắp xếp theo cột tương ứng nếu không truyền không sắp xếp.
-     * @param int $limit = 0. Lấy số hàng tối đa nếu không truyền lấy tất cả.
+     * @param array $oderBy = [columnName => typeOderBy,...] . Sắp xếp theo cột tương ứng nếu truyền [] không sắp xếp.
+     * @param string $limit = 0,20 . Lấy số hàng tối đa nếu  truyền "",
      */
-    function all($selects = ["*"], $oderBy = [], $limit = 20)
+    function all($selects = ["*"], $oderBy = [], $limit = "0,20")
     {
         $columns = implode(', ', $selects);
         $oderByString = '';
@@ -63,18 +63,20 @@ class BaseModel extends Database
                 }
 
                 if ($typeFind == 'like') {
-                    $sql .= " %$key% " . ' like ' . ' ? ';
-                    $arr = array_merge($arr, [$value]);
+                    $sql .= " $key " . ' like ' . ' ?';
+                    $arr[] = "%".$value."%";
                 } else {
                     $sql .= $key . ' =' . ' ?';
-                    $arr = array_merge($arr, [$value]);
+                    $arr[] = $value;
                 }
             }
         }
 
+
         $stm = $this->pdo->prepare($sql);
         $stm->execute($arr);
-       
+    //    var_dump($sql);
+    //    var_dump($arrParams);
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -107,5 +109,92 @@ class BaseModel extends Database
 
         $stm = $this->pdo->query($sql);
         return $stm->rowCount();
+    }
+        /**
+     * insert dữ liệu
+     * @param array $columnsInsert = [colum1 => value1,colum2 => value2,...]
+     * @return int | false số dòng ảnh hưởng
+     */
+    function insert($columnsInsert)
+    {
+        $columns = '( ';
+        $values = '( ';
+        $arr = [];
+        $first = true;
+
+        foreach ($columnsInsert as $column => $value) {
+            if ($first) {
+                
+                $columns .= " $column ";
+                $values  .= " ? ";
+                $arr = array_merge($arr, [$value]);
+                $first = false;
+            } else {
+
+                $columns .= ", $column ";
+                $values  .= ", ? ";
+                $arr = array_merge($arr, [$value]);
+            }
+        }
+        $columns .= ' )';
+        $values .= ' )';
+
+        $sql = "INSERT INTO $this->tableName 
+        $columns
+        VALUES
+        $values ";
+
+
+        try{
+            $stm = $this->pdo->prepare($sql);
+            $stm -> execute($arr);
+            return $stm->rowCount();
+        }catch(Exception $e) {
+            $mes = $e->getMessage();
+            var_dump($mes);
+            var_dump($sql);
+            var_dump($arr);
+        }
+        return false;
+    }
+
+    /**
+     * @param array $arrParams = [key => [value,typeFind], key => [value,typeFind], ...].
+     * Vd :  $arrParams = ["id" => [1,"="], "name" => ["tuan","like"], ...]
+     */
+    function delete( $arrParams)
+    {
+        $sql = "DELETE FROM {$this->tableName} WHERE ";
+        $arr = [];
+
+        foreach ($arrParams as $key => [$value, $typeFind]) {
+            if ($key != '' && $value != '') {
+                if (count($arr) > 0) {
+                    $sql .= " and ";
+                }
+
+                if ($typeFind == 'like') {
+                    $sql .= " %$key% " . ' like ' . ' ? ';
+                    $arr = array_merge($arr, [$value]);
+                } else {
+                    $sql .= $key . ' =' . ' ?';
+                    $arr = array_merge($arr, [$value]);
+                }
+            }
+        }
+        // var_dump($arr);
+        // var_dump($sql);
+        // die();
+        $stm = $this->pdo->prepare($sql);
+        $stm->execute($arr);
+
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function getCount(){
+        $sql = "SELECT count(*) FROM {$this->tableName}";
+        $stm = $this->pdo->query($sql);
+
+        return $stm->fetchAll(PDO::FETCH_ASSOC)[0]["count(*)"];
     }
 }

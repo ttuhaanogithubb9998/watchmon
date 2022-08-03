@@ -10,7 +10,7 @@
          * Lấy danh sách ảnh của sản phẩm
          *  @param int 
         */
-        function getSearch($productId){
+        function getImages($productId){
             return $this->search(["*"],["productId"=>[$productId,"="]]);
         }
  }  

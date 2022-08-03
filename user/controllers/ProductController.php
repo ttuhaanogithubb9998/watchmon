@@ -4,10 +4,30 @@ class ProductController extends BaseController
     private $productModel;
     function __construct()
     {
-        $this->loadModel('Product');
+        $this->loadModel("Product");
+        $this->loadModel("Category");
         $this->loadModel("ProductCategory");
+        $this->loadModel("Subimage");
 
         $this->productModel = new Product();
+    }
+
+    function isSale($productId)
+    {
+        $productCategoryModel = new ProductCategory();
+        $categoryModel = new Category();
+
+        $list = $productCategoryModel->getListByProduct($productId);
+
+        foreach ($list as $pC) {
+            $category =  $categoryModel->getCategory($pC["categoryId"]);
+            if ($category) {
+                if (strpos(strtolower($category['name']), 'sale') !== false) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 
@@ -16,49 +36,84 @@ class ProductController extends BaseController
      */
 
     /***/
-
-    function show($categoryId)
+    function index($indexPage = 1)
     {
-        $productCategoryModel = new ProductCategory();
+        $numberOf = 9;
+        $subImageModel = new Subimage();
+
+
 
         $products = [];
-        foreach ($productCategoryModel->getListByCategory($categoryId) as $category) {
-            $products = $this->productModel->getId($category["productId"]);
+
+        if ($indexPage > 0) {
+
+            $limitStart = ($indexPage - 1) * $numberOf;
+            $products = $this->productModel->getListLimit($limitStart, $numberOf);
+            for ($i = 0; $i < count($products); $i++) {
+                $isSale = $this->isSale($products[$i]['id']);
+                $images = $subImageModel->getImages($products[$i]['id']);
+
+                $products[$i] = array_merge($products[$i], ['images' => $images], ['sale' => $isSale]);
+            }
         }
 
+        $numberMaxPage = $this->productModel->getCountAll() / $numberOf + 1;
+        $numberMaxPage = (int)$numberMaxPage;
+
         $this->view('Product/index.php', [
-            'products'=> $products
+            'products' => $products,
+            'indexPage' => $indexPage,
+            'numberMaxPage' => $numberMaxPage,
+
         ]);
     }
 
-    function showDetail(){
-        
-    }
-    function showAll(){
+    function showByCategory($categoryId)
+    {
+
+        $productCategoryModel = new ProductCategory();
+        $subImageModel = new Subimage();
         $products = [];
 
-        $products =  $this->productModel->getAll();
+        $productCategories = $productCategoryModel->getListByCategory($categoryId);
 
-        $this->view('Product/index.php', [
-            'products'=> $products
+        foreach ($productCategories as $productCategory) {
+            $product = $this->productModel->getProduct($productCategory['productId']);
+            $isSale = $this->isSale($product['id']);
+            $images = $subImageModel->getImages($product['id']);
+
+            $product = array_merge($product, ['images' => $images], ['sale' => $isSale]);
+            $products[] = $product;
+        }
+
+
+        $this->view('Product/category.php', [
+            'products' => $products,
+
         ]);
-
     }
 
+    function detail($productId)
+    {
+        $subImageModel = new Subimage();
+        $productCategoryModel = new ProductCategory();
+        $categoryModel = new Category();
 
-    /**
-     * POST function
-     */
 
-    /**
-     * 
-     */
-    function removeStock($productId){
+        $product = $this->productModel->getProduct($productId);
+        $images = $subImageModel->getImages($product['id']);
 
-        $this->productModel->removeStock($productId,1);
+        $productCategories = $productCategoryModel->getListByProduct($productId);
+        $categories=[];
+        foreach ($productCategories as $productCategory){
+            $category = $categoryModel->getCategory($productCategory['categoryId']);
+            $categories[] = $category;
+        }
+        
+        $product = array_merge($product, ['images' => $images],['categories'=>$categories]);
 
-        return '"[{"productId":"asdf"}]"';
-
+        $this->view('Product/detail.php', [
+            "product" => $product,
+        ]);
     }
-
 }

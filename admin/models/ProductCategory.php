@@ -17,5 +17,17 @@
         return $this->search(["*"],['categoryId'=>[$categoryId,'=']]);
     }
 
-    
+    /**
+     * 
+     */
+    function create($productId,$categoryId){
+        return $this->insert(["productId"=>$productId, "categoryId"=>$categoryId]);
+    }
+
+    /**
+     * 
+     */
+    function deleteByProductId($productId){
+        return $this->delete(["productId"=>[$productId,'=']]);
+    }
  }

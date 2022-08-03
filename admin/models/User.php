@@ -13,4 +13,16 @@ class User extends BaseModel
 
         return $this->all();
     }
+
+    function getLogin($userName, $password)
+    {
+
+        $user =  $this->search(["*"], [
+            'userName' => [$userName, '='],
+            'password' => [$password, '=']
+        ]);
+        if (count($user) > 0 && $user["isAdmin"] == 1)
+            return $user;
+        return [];
+    }
 }

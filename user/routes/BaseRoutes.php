@@ -2,8 +2,26 @@
 abstract class BaseRoutes
 {
     const CONTROLLER_ROOT = ROOT . '/user/controllers/';
+    protected $path;
+    abstract protected function post();
+    abstract protected function get();
 
-    abstract protected function run($path = '');
+
+    function run($path)
+    {
+
+        $METHOD = $_SERVER["REQUEST_METHOD"];
+        $this->path = $path;
+
+        // check method
+        if ($METHOD === 'POST') {
+            return  $this->post();
+        } else {
+            return $this->get();
+        }
+    }
+
+
     function loadCtrl($Name)
     {
 

@@ -17,45 +17,25 @@ class Product extends BaseModel
         return $this->all();
     }
 
-    function getId($productId)
+    /**
+     * @param  int $productId 
+     * @return product | false
+     */
+    function getProduct($productId)
     {
         return $this->search(["*"], ["id" => [$productId, '=']])[0];
     }
 
     /**
-     * update stock 
-     * @param int $id Product,
-     * @param int $count 
+     * 
      */
-    function removeStock($id, $count)
+    function getListLimit($startLimit, $numberOf)
     {
-        $product =  $this->getId($id);
-        $stock  = $product['stock'];
-
-        if ($stock >= $count) {
-            $stock = $stock - $count;
-        } else {
-            return false;
-        }
-
-        return $this->update(["stock" => $stock], $id);
+        return $this->all(["*"], [], $startLimit . "," . $numberOf);
     }
 
-    /**
-     * Xoá (khoá trạng thái)
-     * @param int $id
-     */
-    function remove($id)
-    {
-        return $this->update(['state' => 0], $id);
-    }
-
-    /**
-     * Khôi phục
-     * @param int $id
-     */
-    function restore($id){
-        return $this->update(['state' => 1], $id);
+    function getCountAll(){
+        return $this->getCount();
     }
 }
 

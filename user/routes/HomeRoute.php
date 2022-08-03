@@ -8,7 +8,14 @@ class HomeRoute extends BaseRoutes{
     
     
     
-    function run($path=''){
+    
+    
+    function get(){
+        
         $this->homeCtrl->index();
+    }
+
+    function post(){
+
     }
 }

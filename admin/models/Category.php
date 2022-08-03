@@ -22,4 +22,14 @@ class Category extends BaseModel
         if ($result) return $result[0];
         return false;
     }
+
+    /**
+     * @param string $str in categoryName
+     * @return array the category | false
+     */
+    function getCategoryByName($str){
+        return  $this->search(["*"], ['name' =>[$str,'like']]);
+        
+    }
+    
 }

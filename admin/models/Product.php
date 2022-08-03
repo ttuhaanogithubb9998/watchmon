@@ -17,11 +17,10 @@ class Product extends BaseModel
         return $this->all();
     }
 
-    function getId($productId)
+    function getProduct($productId)
     {
         return $this->search(["*"], ["id" => [$productId, '=']])[0];
     }
-
 
 
     /**
@@ -31,7 +30,7 @@ class Product extends BaseModel
      */
     function removeStock($id, $count)
     {
-        $product =  $this->getId($id);
+        $product =  $this->getProduct($id);
         $stock  = $product['stock'];
 
         if ($stock >= $count) {
@@ -85,6 +84,20 @@ class Product extends BaseModel
         ])[0];
 
         return false;
+    }
+
+    /**
+     * 
+     */
+    function edit($productId,$name, $description, $price, $priceSale, $stock, $state){
+        return $this->update([
+            'name' => $name,
+            'description' => $description,
+            'price' => $price,
+            'priceSale' => $priceSale,
+            'stock' => $stock,
+            'state'=> $state
+        ],$productId);
     }
 }
 

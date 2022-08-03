@@ -2,6 +2,7 @@
 $productImgFolder = 'upload/image/product/';
 $actionUrl = 'admin/product/';
 
+
 // var_dump($products);
 ?>
 
@@ -31,8 +32,8 @@ $actionUrl = 'admin/product/';
                         <tr>
                             <td><i class="fab fa-angular fa-lg text-danger me-0"></i> <strong><?php echo $product['name'] ?></strong></td>
                             <td>
-                                <div class="card h-75 overflow-hidden">
-                                    <img class="w-100" src="<?php echo BASE_URL . $productImgFolder . $product['images'][0]['filename'] ?>" alt="Avatar" class="rounded-circle" />
+                                <div class="card h-50 overflow-hidden">
+                                    <img style ="height:80px" src="<?php echo BASE_URL . $productImgFolder . $product['images'][0]['filename'] ?>" alt="Avatar"  />
                                 </div>
                             </td>
                             <td>

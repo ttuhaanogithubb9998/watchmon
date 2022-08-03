@@ -8,13 +8,13 @@ class Routers
 
     function __construct($baseCtrl)
     {
-        $this->REQUEST_URI =str_replace('/admin','',$_SERVER['REQUEST_URI']);
+        $this->REQUEST_URI = str_replace('/admin', '', $_SERVER['REQUEST_URI']);
         $this->baseCtrl = $baseCtrl;
     }
 
 
 
-    function use($path, $route)
+    function use($path, $route, $checkLogin = true)
     {
         $this->arrUse = array_merge($this->arrUse, [$path => $route]);
     }
@@ -27,7 +27,7 @@ class Routers
 
             if ($this->REQUEST_URI == $path || $this->REQUEST_URI == $path . '/') {
 
-                $route->run();
+                $route->run('');
                 $isNotFound = false;
                 break;
             }
@@ -36,17 +36,16 @@ class Routers
 
             if ($index === 0) {
                 $pathChild = str_replace($path, '', $this->REQUEST_URI);
-                $isPath = strpos($pathChild, '/') === 0;
+                $isPath = strpos($pathChild, '/') === 0||strpos($pathChild, '?')===0;
 
                 if ($isPath) {
                     $route->run($pathChild);
                     $isNotFound = false;
                     break;
                 }
-
             }
         }
-       
+
 
 
         if ($isNotFound) $this->baseCtrl->notFound();
@@ -54,6 +53,7 @@ class Routers
 
     function __destruct()
     {
+        
         $this->run();
     }
 }

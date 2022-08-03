@@ -30,4 +30,10 @@ class Subimage extends BaseModel
             "filename" => $fileName,
         ]);
     }
+    /**
+     * 
+     */
+    function deleteByProductId($productId){
+        return $this->delete(["productId"=>[$productId,'=']]);
+    }
 }

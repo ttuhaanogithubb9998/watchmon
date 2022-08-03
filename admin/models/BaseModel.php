@@ -153,7 +153,43 @@ class BaseModel extends Database
             return $stm->rowCount();
         }catch(Exception $e) {
             $mes = $e->getMessage();
+            var_dump($mes);
+            var_dump($sql);
+            var_dump($arr);
         }
         return false;
+    }
+
+    /**
+     * @param array $arrParams = [key => [value,typeFind], key => [value,typeFind], ...].
+     * Vd :  $arrParams = ["id" => [1,"="], "name" => ["tuan","like"], ...]
+     */
+    function delete( $arrParams)
+    {
+        $sql = "DELETE FROM {$this->tableName} WHERE ";
+        $arr = [];
+
+        foreach ($arrParams as $key => [$value, $typeFind]) {
+            if ($key != '' && $value != '') {
+                if (count($arr) > 0) {
+                    $sql .= " and ";
+                }
+
+                if ($typeFind == 'like') {
+                    $sql .= " %$key% " . ' like ' . ' ? ';
+                    $arr = array_merge($arr, [$value]);
+                } else {
+                    $sql .= $key . ' =' . ' ?';
+                    $arr = array_merge($arr, [$value]);
+                }
+            }
+        }
+        // var_dump($arr);
+        // var_dump($sql);
+        // die();
+        $stm = $this->pdo->prepare($sql);
+        $stm->execute($arr);
+
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
 }

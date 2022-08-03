@@ -1,3 +1,10 @@
+<?php
+// var_dump($categories);
+// var_dump($user);
+// die();
+$productImgFolder = 'upload/image/product/';
+?>
+
 <?php ?>
 <!DOCTYPE html>
 <!--[if IE 9 ]> <html lang="vi" class="ie9 loading-site no-js"> <![endif]-->
@@ -9,10 +16,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <link rel="profile" href="https://gmpg.org/xfn/11" />
-  <link rel="pingback" href="http://mauweb.monamedia.net/rolex/xmlrpc.php" />
-
+  <link rel="pingback" href="<?php echo BASE_URL . "user/assets" ?>/xmlrpc.php" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
     (function(html) {
       html.className = html.className.replace(/\bno-js\b/, 'js')
@@ -22,8 +32,6 @@
   <link rel='dns-prefetch' href='//mauweb.monamedia.net' />
   <link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
   <link rel='dns-prefetch' href='//s.w.org' />
-  <link rel="alternate" type="application/rss+xml" title="Dòng thông tin Rolex &raquo;" href="http://mauweb.monamedia.net/rolex/feed/" />
-  <link rel="alternate" type="application/rss+xml" title="Dòng phản hồi Rolex &raquo;" href="http://mauweb.monamedia.net/rolex/comments/feed/" />
   <script type="text/javascript">
     window._wpemojiSettings = {
       "baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/",
@@ -89,35 +97,35 @@
       padding: 0 !important;
     }
   </style>
-  <link rel='stylesheet' id='dashicons-css' href='http://mauweb.monamedia.net/rolex/wp-includes/css/dashicons.min.css?ver=4.9.15' type='text/css' media='all' />
-  <link rel='stylesheet' id='menu-icons-extra-css' href='http://mauweb.monamedia.net/rolex/wp-content/plugins/ot-flatsome-vertical-menu/libs/menu-icons/css/extra.min.css?ver=0.10.2' type='text/css' media='all' />
-  <link rel='stylesheet' id='hrw-css' href='http://mauweb.monamedia.net/rolex/wp-content/plugins/call-now-icon-animate/css.css' type='text/css' media='' />
-  <link rel='stylesheet' id='contact-form-7-css' href='http://mauweb.monamedia.net/rolex/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.0.5' type='text/css' media='all' />
-  <link rel='stylesheet' id='fb-messenger-style-css' href='http://mauweb.monamedia.net/rolex/wp-content/plugins/fb-messenger/css/style.css?ver=4.9.15' type='text/css' media='all' />
-  <link rel='stylesheet' id='ot-vertical-menu-css' href='http://mauweb.monamedia.net/rolex/wp-content/plugins/ot-flatsome-vertical-menu/assets/css/ot-vertical-menu.css?ver=1.1.0' type='text/css' media='all' />
+  <link rel='stylesheet' id='dashicons-css' href='<?php echo BASE_URL . "user/assets" ?>/wp-includes/css/dashicons.min.css?ver=4.9.15' type='text/css' media='all' />
+  <link rel='stylesheet' id='menu-icons-extra-css' href='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/ot-flatsome-vertical-menu/libs/menu-icons/css/extra.min.css?ver=0.10.2' type='text/css' media='all' />
+  <link rel='stylesheet' id='hrw-css' href='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/call-now-icon-animate/css.css' type='text/css' media='' />
+  <link rel='stylesheet' id='contact-form-7-css' href='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.0.5' type='text/css' media='all' />
+  <link rel='stylesheet' id='fb-messenger-style-css' href='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/fb-messenger/css/style.css?ver=4.9.15' type='text/css' media='all' />
+  <link rel='stylesheet' id='ot-vertical-menu-css' href='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/ot-flatsome-vertical-menu/assets/css/ot-vertical-menu.css?ver=1.1.0' type='text/css' media='all' />
   <style id='woocommerce-inline-inline-css' type='text/css'>
     .woocommerce form .form-row .required {
       visibility: visible;
     }
   </style>
-  <link rel='stylesheet' id='flatsome-icons-css' href='http://mauweb.monamedia.net/rolex/wp-content/themes/flatsome/assets/css/fl-icons.css?ver=3.3' type='text/css' media='all' />
-  <link rel='stylesheet' id='easy-social-share-buttons-css' href='http://mauweb.monamedia.net/rolex/wp-content/plugins/easy-social-share-buttons3/assets/css/default-retina/easy-social-share-buttons.css?ver=3.7.3' type='text/css' media='all' />
-  <link rel='stylesheet' id='essb-cct-style-css' href='http://mauweb.monamedia.net/rolex/wp-content/plugins/easy-social-share-buttons3/lib/modules/click-to-tweet/assets/css/styles.css?ver=3.7.3' type='text/css' media='all' />
+  <link rel='stylesheet' id='flatsome-icons-css' href='<?php echo BASE_URL . "user/assets" ?>/wp-content/themes/flatsome/assets/css/fl-icons.css?ver=3.3' type='text/css' media='all' />
+  <link rel='stylesheet' id='easy-social-share-buttons-css' href='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/easy-social-share-buttons3/assets/css/default-retina/easy-social-share-buttons.css?ver=3.7.3' type='text/css' media='all' />
+  <link rel='stylesheet' id='essb-cct-style-css' href='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/easy-social-share-buttons3/lib/modules/click-to-tweet/assets/css/styles.css?ver=3.7.3' type='text/css' media='all' />
   <link rel='stylesheet' id='bfa-font-awesome-css' href='//cdn.jsdelivr.net/fontawesome/4.7.0/css/font-awesome.min.css?ver=4.7.0' type='text/css' media='all' />
-  <link rel='stylesheet' id='flatsome-main-css' href='http://mauweb.monamedia.net/rolex/wp-content/themes/flatsome/assets/css/flatsome.css?ver=3.7.1' type='text/css' media='all' />
-  <link rel='stylesheet' id='flatsome-shop-css' href='http://mauweb.monamedia.net/rolex/wp-content/themes/flatsome/assets/css/flatsome-shop.css?ver=3.7.1' type='text/css' media='all' />
-  <link rel='stylesheet' id='flatsome-style-css' href='http://mauweb.monamedia.net/rolex/wp-content/themes/flatsome-child/style.css?ver=3.7.1' type='text/css' media='all' />
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
-  <link rel='https://api.w.org/' href='http://mauweb.monamedia.net/rolex/wp-json/' />
-  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://mauweb.monamedia.net/rolex/xmlrpc.php?rsd" />
-  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://mauweb.monamedia.net/rolex/wp-includes/wlwmanifest.xml" />
+  <link rel='stylesheet' id='flatsome-main-css' href='<?php echo BASE_URL . "user/assets" ?>/wp-content/themes/flatsome/assets/css/flatsome.css?ver=3.7.1' type='text/css' media='all' />
+  <link rel='stylesheet' id='flatsome-shop-css' href='<?php echo BASE_URL . "user/assets" ?>/wp-content/themes/flatsome/assets/css/flatsome-shop.css?ver=3.7.1' type='text/css' media='all' />
+  <link rel='stylesheet' id='flatsome-style-css' href='<?php echo BASE_URL . "user/assets" ?>/wp-content/themes/flatsome-child/style.css?ver=3.7.1' type='text/css' media='all' />
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+  <link rel='https://api.w.org/' href='<?php echo BASE_URL . "user/assets" ?>/wp-json/' />
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="<?php echo BASE_URL . "user/assets" ?>/xmlrpc.php?rsd" />
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="<?php echo BASE_URL . "user/assets" ?>/wp-includes/wlwmanifest.xml" />
   <meta name="generator" content="WordPress 4.9.15" />
   <meta name="generator" content="WooCommerce 3.5.1" />
-  <link rel="canonical" href="http://mauweb.monamedia.net/rolex/" />
-  <link rel='shortlink' href='http://mauweb.monamedia.net/rolex/' />
-  <link rel="alternate" type="application/json+oembed" href="http://mauweb.monamedia.net/rolex/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fmauweb.monamedia.net%2Frolex%2F" />
-  <link rel="alternate" type="text/xml+oembed" href="http://mauweb.monamedia.net/rolex/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fmauweb.monamedia.net%2Frolex%2F&#038;format=xml" />
+  <link rel="canonical" href="<?php echo BASE_URL . "user/assets" ?>/" />
+  <link rel='shortlink' href='<?php echo BASE_URL . "user/assets" ?>/' />
+  <link rel="alternate" type="application/json+oembed" href="<?php echo BASE_URL . "user/assets" ?>/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fmauweb.monamedia.net%2Frolex%2F" />
+  <link rel="alternate" type="text/xml+oembed" href="<?php echo BASE_URL . "user/assets" ?>/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fmauweb.monamedia.net%2Frolex%2F&#038;format=xml" />
 
   <!-- Call Now Icon Animate Mobile 0.1.1 by Alan Tien (alantien.com) -->
   <style>
@@ -156,7 +164,7 @@
       opacity: 1;
     }
   </style>
-  <!--[if IE]><link rel="stylesheet" type="text/css" href="http://mauweb.monamedia.net/rolex/wp-content/themes/flatsome/assets/css/ie-fallback.css"><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script><script>var head = document.getElementsByTagName('head')[0],style = document.createElement('style');style.type = 'text/css';style.styleSheet.cssText = ':before,:after{content:none !important';head.appendChild(style);setTimeout(function(){head.removeChild(style);}, 0);</script><script src="http://mauweb.monamedia.net/rolex/wp-content/themes/flatsome/assets/libs/ie-flexibility.js"></script><![endif]-->
+  <!--[if IE]><link rel="stylesheet" type="text/css" href="<?php echo BASE_URL . "user/assets" ?>/wp-content/themes/flatsome/assets/css/ie-fallback.css"><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script><script>var head = document.getElementsByTagName('head')[0],style = document.createElement('style');style.type = 'text/css';style.styleSheet.cssText = ':before,:after{content:none !important';head.appendChild(style);setTimeout(function(){head.removeChild(style);}, 0);</script><script src="<?php echo BASE_URL . "user/assets" ?>/wp-content/themes/flatsome/assets/libs/ie-flexibility.js"></script><![endif]-->
   <script type="text/javascript">
     WebFontConfig = {
       google: {
@@ -306,10 +314,10 @@
       "post_id": 16
     };
   </script>
-  <link rel="icon" href="http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/04/cropped-logo-mona-1-32x32.png" sizes="32x32" />
-  <link rel="icon" href="http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/04/cropped-logo-mona-1-192x192.png" sizes="192x192" />
-  <link rel="apple-touch-icon-precomposed" href="http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/04/cropped-logo-mona-1-180x180.png" />
-  <meta name="msapplication-TileImage" content="http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/04/cropped-logo-mona-1-270x270.png" />
+  <link rel="icon" href="<?php echo BASE_URL . "user/assets" ?>/wp-content/uploads/2018/04/cropped-logo-mona-1-32x32.png" sizes="32x32" />
+  <link rel="icon" href="<?php echo BASE_URL . "user/assets" ?>/wp-content/uploads/2018/04/cropped-logo-mona-1-192x192.png" sizes="192x192" />
+  <link rel="apple-touch-icon-precomposed" href="<?php echo BASE_URL . "user/assets" ?>/wp-content/uploads/2018/04/cropped-logo-mona-1-180x180.png" />
+  <meta name="msapplication-TileImage" content="<?php echo BASE_URL . "user/assets" ?>/wp-content/uploads/2018/04/cropped-logo-mona-1-270x270.png" />
   <style id="custom-css" type="text/css">
     :root {
       --primary-color: #cbba9c;
@@ -1311,14 +1319,8 @@
 </head>
 
 <body class="home page-template page-template-page-blank page-template-page-blank-php page page-id-16 woocommerce-no-js lightbox nav-dropdown-has-arrow">
-
-
-  <a class="skip-link screen-reader-text" href="#main">Skip to content</a>
-
   <div id="wrapper">
-
-
-    <header id="header" class = "header has-sticky sticky-jump">
+    <header id="header" class="header has-sticky sticky-jump">
       <div class="header-wrapper">
         <div id="masthead" class="header-main hide-for-sticky">
           <div class="header-inner flex-row container logo-left medium-logo-center" role="navigation">
@@ -1326,8 +1328,8 @@
             <!-- Logo -->
             <div id="logo" class="flex-col logo">
               <!-- Header logo -->
-              <a href="/" title="Rolex" rel="home">
-                <img width="200" height="90" src="http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/12/logo.png" class="header_logo header-logo" alt="Rolex" /><img width="200" height="90" src="http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/12/logo.png" class="header-logo-dark" alt="Rolex" /></a>
+              <a href="<?php echo BASE_URL ?>" title="Rolex" rel="home">
+                <img width="200" height="90" src="<?php echo BASE_URL . "user/assets" ?>/wp-content/uploads/2018/12/logo.png" class="header_logo header-logo" alt="Rolex" /><img width="200" height="90" src="<?php echo BASE_URL . "user/assets" ?>/wp-content/uploads/2018/12/logo.png" class="header-logo-dark" alt="Rolex" /></a>
             </div>
 
             <!-- Mobile Left Elements -->
@@ -1358,7 +1360,7 @@
                     <li class="header-search-form search-form html relative has-icon">
                       <div class="header-search-form-wrapper">
                         <div class="searchform-wrapper ux-search-box relative form- is-normal">
-                          <form role="search" method="get" class="searchform" action="http://mauweb.monamedia.net/rolex/">
+                          <form role="search" method="get" class="searchform" action="<?php echo BASE_URL . "user/assets" ?>/">
                             <div class="flex-row relative">
                               <div class="flex-col flex-grow">
                                 <input type="search" class="search-field mb-0" name="s" value="" placeholder="Tìm kiếm&hellip;" />
@@ -1378,7 +1380,7 @@
                 </li>
                 <li class="header-divider"></li>
                 <li class="account-item has-icon">
-                  <a href="http://mauweb.monamedia.net/rolex/tai-khoan/" class="nav-top-link nav-top-not-logged-in is-small" data-open="#login-form-popup">
+                  <a href="<?php echo BASE_URL . "user" ?>" class="nav-top-link nav-top-not-logged-in is-small">
                     <i class="icon-user"></i>
                   </a>
                   <!-- .account-login-link -->
@@ -1386,26 +1388,78 @@
                 <li class="header-divider"></li>
                 <li class="cart-item has-icon has-dropdown">
 
-                  <a href="http://mauweb.monamedia.net/rolex/gio-hang/" title="Giỏ hàng" class="header-cart-link is-small">
+                  <a href="<?php echo BASE_URL . "cart" ?>" title="Giỏ hàng" class="header-cart-link is-small">
 
 
                     <span class="header-cart-title">
-                      <span class="cart-price"><span class="woocommerce-Price-amount amount">0&nbsp;<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></span>
+                      <span class="cart-price"><span class="woocommerce-Price-amount amount">
+                          <?php if (isset($user['carts']['total'])) {
+                            echo $user['carts']['total'];
+                          } else {
+                            echo "0";
+                          } ?>&nbsp;<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></span>
                     </span>
 
                     <span class="cart-icon image-icon">
-                      <strong>0</strong>
+                      <strong>
+                        <?php if (isset($user['carts']) && count($user['carts']) > 1) {
+                          echo count($user['carts']) - 1;
+                        } else {
+                          echo 0;
+                        } ?>
+                      </strong>
                     </span>
                   </a>
 
                   <ul class="nav-dropdown nav-dropdown-simple">
                     <li class="html widget_shopping_cart">
                       <div class="widget_shopping_cart_content">
+                        <ul class="woocommerce-mini-cart cart_list product_list_widget ">
 
 
+                          <?php if (isset($user['carts']) && count($user['carts']) > 1) {
+
+                            foreach ($user['carts'] as $key => $cart) {
+                              if ($key !== "total") {
+                          ?>
+                                <li class="woocommerce-mini-cart-item mini_cart_item">
+                                  <!-- <a href="" class="remove remove_from_cart_button" aria-label="Xóa sản phẩm này">×</a> -->
+                                  <a href="<?php echo BASE_URL . "product/detail?id=" . $cart['product']['id'] ?>">
+                                    <img width="480" height="480" src="<?php echo BASE_URL . $productImgFolder . $cart['product']['images'][0]['filename'] ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
+                                    <?php echo $cart['product']['name'] ?>
+                                  </a>
+                                  <span class="quantity">
+                                    <?php echo $cart['quantity']; ?> ×
+                                    <span class="woocommerce-Price-amount amount">
+                                      <?php echo number_format($cart['product']['price'], 0, '.', ',') ?>&nbsp;
+                                      <span class="woocommerce-Price-currencySymbol">
+                                        ₫
+                                      </span>
+                                    </span>
+                                  </span>
+                                </li>
+                            <?php
+                              }
+                            }
+                            ?>
+                        </ul>
+                        <p class="woocommerce-mini-cart__total total">
+                          <strong>Tổng :</strong>
+                          <span class="woocommerce-Price-amount amount">
+                            <?php echo number_format($user['carts']['total'], 0, '.', ',') ?>&nbsp;
+                            <span class="woocommerce-Price-currencySymbol">₫</span>
+                          </span>
+                        </p>
+                        <p class="woocommerce-mini-cart__buttons buttons">
+                          <a href="/cart" class="button wc-forward">Xem giỏ hàng</a>
+                          <a href="/cart/pay" class="button checkout wc-forward">Thanh toán</a>
+                        </p>
+                      <?php
+                          } else {
+                      ?>
                         <p class="woocommerce-mini-cart__empty-message">Chưa có sản phẩm trong giỏ hàng.</p>
-
-
+                      <?php
+                          } ?>
                       </div>
                     </li>
                   </ul><!-- .nav-dropdown -->
@@ -1419,10 +1473,16 @@
               <ul class="mobile-nav nav nav-right ">
                 <li class="cart-item has-icon">
 
-                  <a href="http://mauweb.monamedia.net/rolex/gio-hang/" class="header-cart-link off-canvas-toggle nav-top-link is-small" data-open="#cart-popup" data-class="off-canvas-cart" title="Giỏ hàng" data-pos="right">
+                  <a href="<?php echo BASE_URL . "cart" ?>" class="header-cart-link off-canvas-toggle nav-top-link is-small" data-open="#cart-popup" data-class="off-canvas-cart" title="Giỏ hàng" data-pos="right">
 
                     <span class="cart-icon image-icon">
-                      <strong>0</strong>
+                      <strong>
+                        <?php if (isset($user['carts'])) {
+                          echo count($user['carts']);
+                        } else {
+                          echo 0;
+                        } ?>
+                      </strong>
                     </span>
                   </a>
 
@@ -1434,11 +1494,8 @@
                         <h4 class="uppercase">Giỏ hàng</h4>
                         <div class="is-divider"></div>
                       </div>
+
                       <div class="widget_shopping_cart_content">
-
-
-                        <p class="woocommerce-mini-cart__empty-message">Chưa có sản phẩm trong giỏ hàng.</p>
-
 
                       </div>
                       <div class="cart-sidebar-content relative"></div>
@@ -1462,20 +1519,42 @@
 
             <div class="flex-col hide-for-medium flex-center">
               <ul class="nav header-nav header-bottom-nav nav-center  nav-divided nav-size-medium nav-spacing-xlarge nav-uppercase">
-                <li id="menu-item-703" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home active  menu-item-703"><a href="http://mauweb.monamedia.net/rolex" class="nav-top-link">Trang chủ</a></li>
-                <li id="menu-item-699" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat  menu-item-699"><a href="http://mauweb.monamedia.net/rolex/danh-muc/san-pham-hot/" class="nav-top-link">Sản phẩm Hot</a></li>
-                <li id="menu-item-698" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat  menu-item-698"><a href="http://mauweb.monamedia.net/rolex/danh-muc/sale/" class="nav-top-link">Sale</a></li>
-                <li id="menu-item-695" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat  menu-item-695"><a href="http://mauweb.monamedia.net/rolex/danh-muc/dong-ho-nu/" class="nav-top-link">Đồng hồ nữ</a></li>
-                <li id="menu-item-696" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat  menu-item-696"><a href="http://mauweb.monamedia.net/rolex/danh-muc/dong-ho-nam/" class="nav-top-link">Đồng hồ nam</a></li>
-                <li id="menu-item-747" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  menu-item-747 has-dropdown"><a href="http://mauweb.monamedia.net/rolex/brands/" class="nav-top-link">BRANDS<i class="icon-angle-down"></i></a>
+                <li id="menu-item-703" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home active  menu-item-703"><a href="<?php echo BASE_URL ?>" class="nav-top-link">Trang chủ</a></li>
+
+                <?php
+                for ($i = 0; $i < 4; $i++) {
+                  if (isset($categories[$i])) {
+                ?>
+                    <li id="menu-item-699" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat  menu-item-699">
+                      <a href="<?php echo BASE_URL . "product/category?id=" . $categories[$i]['id'] ?>" class="nav-top-link">
+                        <?php echo  mb_strtoupper($categories[$i]['name'], "UTF-8") ?>
+                      </a>
+                    </li>
+                <?php
+                  }
+                }
+                ?>
+
+                <li id="menu-item-747" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  menu-item-747 has-dropdown">
+                  <a style="cursor: pointer;" class="nav-top-link">BRANDS<i class="icon-angle-down"></i></a>
                   <ul class='nav-dropdown nav-dropdown-simple'>
-                    <li id="menu-item-700" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat  menu-item-700"><a href="http://mauweb.monamedia.net/rolex/danh-muc/citizen/">CITIZEN</a></li>
-                    <li id="menu-item-701" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat  menu-item-701"><a href="http://mauweb.monamedia.net/rolex/danh-muc/rolex/">ROLEX</a></li>
-                    <li id="menu-item-702" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat  menu-item-702"><a href="http://mauweb.monamedia.net/rolex/danh-muc/casio/">CASIO</a></li>
+                    <?php
+                    for ($i = 4; $i < count($categories); $i++) {
+                      if (isset($categories[$i])) {
+                    ?>
+                        <li id="menu-item-700" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat  menu-item-700">
+                          <a href="<?php echo BASE_URL . "product/category?id=" . $categories[$i]['id'] ?>">
+                            <?php echo  mb_strtoupper($categories[$i]['name'], "UTF-8") ?>
+                          </a>
+                        </li>
+                    <?php
+                      }
+                    }
+                    ?>
                   </ul>
                 </li>
-                <li id="menu-item-720" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-720"><a href="http://mauweb.monamedia.net/rolex/lien-he/" class="nav-top-link">Liên hệ</a></li>
-                <li id="menu-item-749" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-749"><a href="http://mauweb.monamedia.net/rolex/gioi-thieu/" class="nav-top-link">Giới thiệu</a></li>
+                <li id="menu-item-720" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-720"><a href="<?php echo BASE_URL . "home/concact" ?>" class="nav-top-link">Liên hệ</a></li>
+                <li id="menu-item-749" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-749"><a href="<?php echo BASE_URL . "home/introduce" ?>" class="nav-top-link">Giới thiệu</a></li>
               </ul>
             </div><!-- flex-col -->
 
@@ -1493,9 +1572,13 @@
 
 
     <main>
-    <?php 
-      require($viewAction)
-    ?>
+      <div id="content" role="main" class="content-area page-wapper">
+
+        <?php
+        require($viewAction)
+        ?>
+
+      </div>
     </main>
 
     <footer id="footer" class="footer-wrapper">
@@ -1522,7 +1605,7 @@
                 <div class="img has-hover x md-x lg-x y md-y lg-y" id="image_1759609375">
                   <a class="" href="localhost/watch-rolex" target="_self">
                     <div class="img-inner box-shadow-4-hover dark" style="margin:20px 0px 0px 0px;">
-                      <img width="800" height="500" src="http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/12/logo-watch-white-2.png" class="attachment-original size-original" alt="" srcset="http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/12/logo-watch-white-2.png 800w, http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/12/logo-watch-white-2-480x300.png 480w, http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/12/logo-watch-white-2-300x188.png 300w, http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/12/logo-watch-white-2-768x480.png 768w, http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/12/logo-watch-white-2-600x375.png 600w" sizes="(max-width: 800px) 100vw, 800px" />
+                      <img width="800" height="500" src="<?php echo BASE_URL . "user/assets" ?>/wp-content/uploads/2018/12/logo-watch-white-2.png" class="attachment-original size-original" alt="" srcset="<?php echo BASE_URL . "user/assets" ?>/wp-content/uploads/2018/12/logo-watch-white-2.png 800w, http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/12/logo-watch-white-2-480x300.png 480w, http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/12/logo-watch-white-2-300x188.png 300w, http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/12/logo-watch-white-2-768x480.png 768w, http://mauweb.monamedia.net/rolex/wp-content/uploads/2018/12/logo-watch-white-2-600x375.png 600w" sizes="(max-width: 800px) 100vw, 800px" />
                     </div>
                   </a>
                   <style scope="scope">
@@ -1685,8 +1768,6 @@
                   </div>
                 </div><!-- .icon-box -->
 
-
-
               </div>
             </div>
             <div class="col medium-4 small-12 large-3">
@@ -1706,7 +1787,7 @@
                 <p>Đăng ký để nhận được được thông tin mới nhất từ chúng tôi.</p>
                 <div role="form" class="wpcf7" id="wpcf7-f256-o1" lang="vi" dir="ltr">
                   <div class="screen-reader-response"></div>
-                  <form action="/rolex/#wpcf7-f256-o1" method="post" class="wpcf7-form" novalidate="novalidate">
+                  <form action="" method="post" class="wpcf7-form" novalidate="novalidate">
                     <div style="display: none;">
                       <input type="hidden" name="_wpcf7" value="256" />
                       <input type="hidden" name="_wpcf7_version" value="5.0.5" />
@@ -1762,17 +1843,6 @@
         </style>
       </section>
 
-      <div class="absolute-footer dark medium-text-center text-center">
-        <div class="container clearfix">
-
-
-          <div class="footer-primary pull-left">
-            <div class="copyright-footer">
-              © Bản quyền thuộc về <công ty khách hàng>. Thiết kế website <img src="http://mona-media.com/logo.png" style="width:20px;vertical-align:sub;" alt="MonaMedia"> <a href=" " title="Mona Media"><strong>Mona Media</strong></a> </div>
-          </div><!-- .left -->
-        </div><!-- .container -->
-      </div><!-- .absolute-footer -->
-
       <a href="#top" class="back-to-top button icon invert plain fixed bottom z-1 is-outline circle" id="top-link"><i class="icon-angle-up"></i></a>
 
     </footer><!-- .footer-wrapper -->
@@ -1786,7 +1856,7 @@
         <li class="header-search-form search-form html relative has-icon">
           <div class="header-search-form-wrapper">
             <div class="searchform-wrapper ux-search-box relative form- is-normal">
-              <form role="search" method="get" class="searchform" action="http://mauweb.monamedia.net/rolex/">
+              <form role="search" method="get" class="searchform" action="<?php echo BASE_URL . "user/assets" ?>/">
                 <div class="flex-row relative">
                   <div class="flex-col flex-grow">
                     <input type="search" class="search-field mb-0" name="s" value="" placeholder="Tìm kiếm&hellip;" />
@@ -1802,27 +1872,53 @@
             </div>
           </div>
         </li>
-        <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-703"><a href="http://mauweb.monamedia.net/rolex" class="nav-top-link">Trang chủ</a></li>
-        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-699"><a href="http://mauweb.monamedia.net/rolex/danh-muc/san-pham-hot/" class="nav-top-link">Sản phẩm Hot</a></li>
-        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-698"><a href="http://mauweb.monamedia.net/rolex/danh-muc/sale/" class="nav-top-link">Sale</a></li>
-        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-695"><a href="http://mauweb.monamedia.net/rolex/danh-muc/dong-ho-nu/" class="nav-top-link">Đồng hồ nữ</a></li>
-        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-696"><a href="http://mauweb.monamedia.net/rolex/danh-muc/dong-ho-nam/" class="nav-top-link">Đồng hồ nam</a></li>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-747"><a href="http://mauweb.monamedia.net/rolex/brands/" class="nav-top-link">BRANDS</a>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-703">
+          <a href="http://mauweb.monamedia.net/rolex" class="nav-top-link">Trang chủ</a>
+        </li>
+        <?php
+        for ($i = 0; $i < 4; $i++) {
+          if (isset($categories[$i])) {
+        ?>
+            <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-699">
+              <a href="<?php echo BASE_URL . "product/category?id=" . $categories[$i]['id'] ?>" class="nav-top-link">
+                <?php echo  mb_strtoupper($categories[$i]['name'], "UTF-8") ?>
+              </a>
+            </li>
+        <?php
+          }
+        }
+        ?>
+
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-747">
+          <a href="<?php echo BASE_URL . "user/assets" ?>/brands/" class="nav-top-link">BRANDS</a>
+
           <ul class=children>
-            <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-700"><a href="http://mauweb.monamedia.net/rolex/danh-muc/citizen/">CITIZEN</a></li>
-            <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-701"><a href="http://mauweb.monamedia.net/rolex/danh-muc/rolex/">ROLEX</a></li>
-            <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-702"><a href="http://mauweb.monamedia.net/rolex/danh-muc/casio/">CASIO</a></li>
+            <?php
+            for ($i = 4; $i < count($categories); $i++) {
+              if (isset($categories[$i])) {
+            ?>
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-700">
+                  <a href="<?php echo BASE_URL . "product/category?id=" . $categories[$i]['id'] ?>">
+                    <?php echo  mb_strtoupper($categories[$i]['name'], "UTF-8") ?>
+                  </a>
+                </li>
+            <?php
+              }
+            }
+            ?>
           </ul>
         </li>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-720"><a href="http://mauweb.monamedia.net/rolex/lien-he/" class="nav-top-link">Liên hệ</a></li>
-        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-749"><a href="http://mauweb.monamedia.net/rolex/gioi-thieu/" class="nav-top-link">Giới thiệu</a></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-720"><a href="<?php echo BASE_URL . "home/concact" ?>" class="nav-top-link">Liên hệ</a></li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-749"><a href="<?php echo BASE_URL . "home/introduce" ?>" class="nav-top-link">Giới thiệu</a></li>
+
         <li class="account-item has-icon menu-item">
-          <a href="http://mauweb.monamedia.net/rolex/tai-khoan/" class="nav-top-link nav-top-not-logged-in">
+          <a href="<?php echo BASE_URL . "user/login" ?>/tai-khoan/" class="nav-top-link nav-top-not-logged-in">
             <span class="header-account-title">
               Đăng nhập </span>
           </a><!-- .account-login-link -->
 
         </li>
+
         <li class="html custom html_topbar_right">
           <p class="mona_html hotline"><strong>HOTLINE: </strong><a href="tel:0769220162">076 922 0162</a></p>
         </li>
@@ -1830,82 +1926,9 @@
     </div><!-- inner -->
   </div>
   <!-- #mobile-menu -->
-  <a href="tel:0769220162" class="hotlinemp" rel="nofollow">
-    <div class="mypage-alo-phone" >
-      <div class="animated infinite zoomIn mypage-alo-ph-circle">
-      </div>
-      <div class="animated infinite pulse mypage-alo-ph-circle-fill">
-      </div>
-      <div class="animated infinite tada mypage-alo-ph-img-circle">
-      </div>
-    </div>
-  </a>
-  <!-- FB Messenger -->
-  <div id="fbMsg">
-    <img data-remodal-target="fb-messenger" src="http://mauweb.monamedia.net/rolex/wp-content/plugins/fb-messenger/images/fb-messenger.png">
-  </div>
-
-  <div class="remodal" data-remodal-id="fb-messenger">
-    <div class="fb-page" data-tabs="messages" data-href="" data-width="310" data-height="330" data-href="" data-small-header="true" data-hide-cover="false" data-show-facepile="true" data-adapt-container-width="true">
-      <div class="fb-xfbml-parse-ignore">
-        <blockquote>Loading...</blockquote>
-      </div>
-    </div>
-  </div>
-
-  <div id="fb-root"></div>
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-  <script>
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
-  <!-- End FB Messenger -->
-  <div id="login-form-popup" class="lightbox-content mfp-hide">
-    <div class="woocommerce-notices-wrapper"></div>
-    <div class="account-container lightbox-inner">
 
 
-      <div class="account-login-inner">
 
-        <h3 class="uppercase">Đăng nhập</h3>
-
-        <form class="woocommerce-form woocommerce-form-login login" method="post">
-
-
-          <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-            <label for="username">Tên tài khoản hoặc địa chỉ email&nbsp;<span class="required">*</span></label>
-            <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" autocomplete="username" value="" />
-          </p>
-          <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-            <label for="password">Mật khẩu&nbsp;<span class="required">*</span></label>
-            <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" autocomplete="current-password" />
-          </p>
-
-
-          <p class="form-row">
-            <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="955a4243fa" /><input type="hidden" name="_wp_http_referer" value="/rolex/" /> <button type="submit" class="woocommerce-Button button" name="login" value="Đăng nhập">Đăng nhập</button>
-            <label class="woocommerce-form__label woocommerce-form__label-for-checkbox inline">
-              <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span>Ghi nhớ mật khẩu</span>
-            </label>
-          </p>
-          <p class="woocommerce-LostPassword lost_password">
-            <a href="http://mauweb.monamedia.net/rolex/tai-khoan/lost-password/">Quên mật khẩu?</a>
-          </p>
-
-
-        </form>
-      </div><!-- .login-inner -->
-
-
-    </div><!-- .account-login-container -->
-
-  </div>
   <script type="text/javascript">
     var c = document.body.className;
     c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
@@ -1926,10 +1949,10 @@
     };
     /* ]]> */
   </script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=5.0.5'></script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/plugins/fb-messenger/js/index.js?ver=4.9.15'></script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/plugins/ot-flatsome-vertical-menu/assets/js/ot-vertical-menu.js?ver=1.1.0'></script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.70'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=5.0.5'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/fb-messenger/js/index.js?ver=4.9.15'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/ot-flatsome-vertical-menu/assets/js/ot-vertical-menu.js?ver=1.1.0'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.70'></script>
   <script type='text/javascript'>
     /* <![CDATA[ */
     var wc_add_to_cart_params = {
@@ -1942,8 +1965,8 @@
     };
     /* ]]> */
   </script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=3.5.1'></script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=3.5.1'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4'></script>
   <script type='text/javascript'>
     /* <![CDATA[ */
     var woocommerce_params = {
@@ -1952,7 +1975,7 @@
     };
     /* ]]> */
   </script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=3.5.1'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=3.5.1'></script>
   <script type='text/javascript'>
     /* <![CDATA[ */
     var wc_cart_fragments_params = {
@@ -1963,9 +1986,9 @@
     };
     /* ]]> */
   </script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=3.5.1'></script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/themes/flatsome/inc/extensions/flatsome-live-search/flatsome-live-search.js?ver=3.7.1'></script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-includes/js/hoverIntent.min.js?ver=1.8.1'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=3.5.1'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/themes/flatsome/inc/extensions/flatsome-live-search/flatsome-live-search.js?ver=3.7.1'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-includes/js/hoverIntent.min.js?ver=1.8.1'></script>
   <script type='text/javascript'>
     /* <![CDATA[ */
     var flatsomeVars = {
@@ -1978,10 +2001,10 @@
     };
     /* ]]> */
   </script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/themes/flatsome/assets/js/flatsome.js?ver=3.7.1'></script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/themes/flatsome/assets/js/woocommerce.js?ver=3.7.1'></script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-includes/js/wp-embed.min.js?ver=4.9.15'></script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/themes/flatsome/assets/libs/packery.pkgd.min.js?ver=3.7.1'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/themes/flatsome/assets/js/flatsome.js?ver=3.7.1'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/themes/flatsome/assets/js/woocommerce.js?ver=3.7.1'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-includes/js/wp-embed.min.js?ver=4.9.15'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/themes/flatsome/assets/libs/packery.pkgd.min.js?ver=3.7.1'></script>
   <script type='text/javascript'>
     /* <![CDATA[ */
     var _zxcvbnSettings = {
@@ -1989,7 +2012,7 @@
     };
     /* ]]> */
   </script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-includes/js/zxcvbn-async.min.js?ver=1.0'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-includes/js/zxcvbn-async.min.js?ver=1.0'></script>
   <script type='text/javascript'>
     /* <![CDATA[ */
     var pwsL10n = {
@@ -2002,7 +2025,7 @@
     };
     /* ]]> */
   </script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-admin/js/password-strength-meter.min.js?ver=4.9.15'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-admin/js/password-strength-meter.min.js?ver=4.9.15'></script>
   <script type='text/javascript'>
     /* <![CDATA[ */
     var wc_password_strength_meter_params = {
@@ -2012,7 +2035,7 @@
     };
     /* ]]> */
   </script>
-  <script type='text/javascript' src='http://mauweb.monamedia.net/rolex/wp-content/plugins/woocommerce/assets/js/frontend/password-strength-meter.min.js?ver=3.5.1'></script>
+  <script type='text/javascript' src='<?php echo BASE_URL . "user/assets" ?>/wp-content/plugins/woocommerce/assets/js/frontend/password-strength-meter.min.js?ver=3.5.1'></script>
   <style type="text/css"></style>
   <script type="text/javascript">
     var essb_clicked_lovethis = false;
@@ -2140,6 +2163,12 @@
       document.body.appendChild(e);
     };
   </script>
+
+
+  <!-- myjs -->
+
+  <script type="text/javascript" src='/user/assets/mycustom/myjs/addTocart.js'></script>
+
 </body>
 
 </html>

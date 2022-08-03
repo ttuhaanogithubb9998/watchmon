@@ -10,8 +10,9 @@ class BaseController
      * @param $viewPath vd: Product/index.php (thuộc views)
      * @param $arrayData đẩy dữ liệu tới view ["tên biến1"=>giá trị,..]
      *  vd: ["product"=>$Product,"title"=>$title,...]
+     * @param string path view layout
      */
-    function view($viewPath, $arrayData)
+    function view($viewPath, $arrayData,$viewLayout = self::LAYOUT)
     {
         // tạo biến để truy xuất từ view
         foreach ($arrayData as $key => $value) {
@@ -19,7 +20,7 @@ class BaseController
         }
 
         $viewAction =$viewPath;
-        require_once(self::LAYOUT);
+        require_once($viewLayout);
     }
 
     // load models;
@@ -33,7 +34,10 @@ class BaseController
 
     function notFound()
     {
-        $viewAction = 'notFound.html';
-        require_once(self::LAYOUT);
+        require_once(ROOT . '/admin/views/notFound.php');
     }
+
+    
+
+
 }

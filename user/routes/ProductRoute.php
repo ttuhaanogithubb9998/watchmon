@@ -2,7 +2,6 @@
 class ProductRoute extends BaseRoutes
 {
     private $productCtrl;
-    private $path;
     function __construct()
     {
         $this->loadCtrl('Product');
@@ -11,35 +10,31 @@ class ProductRoute extends BaseRoutes
 
 
 
-    function run($path = '')
-    {
-        $METHOD = $_SERVER["REQUEST_METHOD"];
-        $this->path = $path;
 
-        if ($METHOD === 'POST') {
-            $this->post();
-        } else {
-            $this->get();
-        }
-    }
     function get()
     {
-        $this->productCtrl->showAll();
-
+        switch (true) {
+            case preg_match('/^(\/){0,1}$/', $this->path) != 0:
+                return $this->productCtrl->index();
+            case preg_match('/^(\/page\?id=)[0-9]{1,10}$/', $this->path) != 0:
+                $indexPage = isset($_GET['id']) ? $_GET['id'] :1;
+                return $this->productCtrl->index($indexPage);
+            case preg_match('/^(\/category\?id=)[0-9]{1,10}$/', $this->path) != 0:
+                $categoryId = isset($_GET['id']) ? $_GET['id'] :1;
+                return $this->productCtrl->showByCategory($categoryId);
+            case preg_match('/^(\/detail\?id=)[0-9]{1,10}$/', $this->path) != 0:
+                $productId = isset($_GET['id']) ? $_GET['id'] :1;
+                return $this->productCtrl->detail($productId);
+            default:
+                $this->productCtrl->notFound();
+        }
     }
+
     function post()
     {
         switch ($this->path) {
-            case '/remove':
-
-                $productId = $_POST['id'];
-                $HTTP_REFERER = $_SERVER['HTTP_REFERER'];
-                $res =   $this->productCtrl->removeStock($productId);
-                
-                header("Location: {$HTTP_REFERER}", true, 301);
-                exit;
+            default:
+                $this->productCtrl->notFound();
         }
-
-        $this->productCtrl->showDetail();
     }
 }
