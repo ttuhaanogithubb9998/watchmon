@@ -8,6 +8,7 @@ require_once('./admin/routes/BaseRoutes.php');
 
 require_once('./admin/routes/UserRoute.php');
 require_once('./admin/routes/ProductRoute.php');
+require_once('./admin/routes/InvoiceRoute.php');
 require_once('./admin/routes/HomeRoute.php');
 require_once('./admin/routes/LoginRoute.php');
 require_once('./admin/routes/LogoutRoute.php');
@@ -18,6 +19,7 @@ $routers->use('/',new HomeRoute());
 $routers->use('/index',new HomeRoute());
 $routers->use('/user',new UserRoute());
 $routers->use('/product', new ProductRoute());
+$routers->use('/invoice', new InvoiceRoute());
 $routers->use('/login',new LoginRoute());
 $routers->use('/logout',new LogoutRoute());
 

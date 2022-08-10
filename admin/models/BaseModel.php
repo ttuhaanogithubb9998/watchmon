@@ -8,7 +8,8 @@ class BaseModel extends Database
     public function __construct($tableName)
     {
         $this->tableName = $tableName;
-        $this->pdo  = $this->connection();
+        require_once('./core/Database.php');
+        $this->pdo  = Database::connection();
     }
 
     /**
@@ -73,7 +74,15 @@ class BaseModel extends Database
         }
 
         $stm = $this->pdo->prepare($sql);
-        $stm->execute($arr);
+        try {
+
+            $stm->execute($arr);
+        } catch (Exception $e) {
+            var_dump($sql);
+            var_dump($arr);
+            var_dump($e->getMessage());
+            die();
+        }
 
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -126,7 +135,7 @@ class BaseModel extends Database
 
         foreach ($columnsInsert as $column => $value) {
             if ($first) {
-                
+
                 $columns .= " $column ";
                 $values  .= " ? ";
                 $arr = array_merge($arr, [$value]);
@@ -147,11 +156,11 @@ class BaseModel extends Database
         $values ";
 
 
-        try{
+        try {
             $stm = $this->pdo->prepare($sql);
-            $stm -> execute($arr);
+            $stm->execute($arr);
             return $stm->rowCount();
-        }catch(Exception $e) {
+        } catch (Exception $e) {
             $mes = $e->getMessage();
             var_dump($mes);
             var_dump($sql);
@@ -164,7 +173,7 @@ class BaseModel extends Database
      * @param array $arrParams = [key => [value,typeFind], key => [value,typeFind], ...].
      * Vd :  $arrParams = ["id" => [1,"="], "name" => ["tuan","like"], ...]
      */
-    function delete( $arrParams)
+    function delete($arrParams)
     {
         $sql = "DELETE FROM {$this->tableName} WHERE ";
         $arr = [];

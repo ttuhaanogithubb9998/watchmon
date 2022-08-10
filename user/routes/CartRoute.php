@@ -49,6 +49,17 @@ class CartRoute extends BaseRoutes
                 $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 0;
                 $productId = isset($_POST['productId']) ? $_POST['productId'] : 0;
                 return $this->cartCtrl->addMulti($productId, $quantity);
+            case preg_match('/^(\/pay)$/', $this->path) != 0:
+                $name = isset($_POST['name']) ? trim($_POST['name']) : "";
+                $address = isset($_POST['address']) ? trim($_POST['address']) : "";
+                $email = isset($_POST['email']) ? trim($_POST['email']) : "";
+                $phone = isset($_POST['phone']) ? trim($_POST['phone']) : "";
+                $description = isset($_POST['description']) ? trim($_POST['description']) : "";
+                $total = isset($_POST['total']) ? trim($_POST['total']) : "";
+
+                return $this->cartCtrl->pay($name, $address, $email, $phone, $description,$total);
+            default:
+                $this->cartCtrl->notFound();
         }
     }
 }

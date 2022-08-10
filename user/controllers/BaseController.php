@@ -3,7 +3,12 @@ class BaseController
 {
     const MODEL_ROOT = ROOT . '/user/models/';
     const LAYOUT = ROOT . '/user/views/layout.php';
+    protected $dataLayout;
 
+    function __construct()
+    {
+        $this->dataLayout();
+    }
 
     /**
      * Load view 
@@ -14,8 +19,9 @@ class BaseController
         foreach ($arrayData as $key => $value) {
             $$key = $value;
         }
-        $dataLayout = $this->dataLayout();
-        foreach ($dataLayout as $key => $value) {
+
+        $this->dataLayout();
+        foreach ($this->dataLayout as $key => $value) {
             $$key = $value;
         }
 
@@ -34,8 +40,8 @@ class BaseController
 
     function notFound()
     {
-        $dataLayout = $this->dataLayout();
-        foreach ($dataLayout as $key => $value) {
+        $this->dataLayout();
+        foreach ($this->dataLayout as $key => $value) {
             $$key = $value;
         }
 
@@ -59,24 +65,32 @@ class BaseController
         $productModel = new Product();
         $this->loadModel("Subimage");
         $subImageModel = new Subimage();
+        $this->loadModel("User");
+        $userModel = new User();
 
         $categories = $categoryModel->getAll();
 
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        
-        $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
+        $user = "";
+
+        if (isset($_SESSION['user']['id'])) {
+            $user = $userModel->getUserById($_SESSION['user']['id']);
+            $_SESSION['user'] = $user;
+        }
+
+
 
         if (isset($user['id'])) {
             $carts = $cartModel->getCartsByUser($user['id']);
-            
+
             $total = 0;
-            for($i=0;$i<count($carts);$i++)  {
+            for ($i = 0; $i < count($carts); $i++) {
                 $product = $productModel->getProduct($carts[$i]['productId']);
                 $subimage = $subImageModel->getImages($product['id']);
                 $product['images'] = $subimage;
-                $carts[$i]['product']=$product;
+                $carts[$i]['product'] = $product;
                 $total +=  $carts[$i]['quantity'] * $product['price'];
             }
             $carts = array_merge($carts, ["total" => $total]);
@@ -89,6 +103,7 @@ class BaseController
             ['categories' => $categories]
         );
 
+        $this->dataLayout = $data;
         return $data;
     }
 }

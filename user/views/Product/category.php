@@ -14,7 +14,7 @@
 					<?php
 					foreach ($categories as $category) {
 					?>
-						<li class="cat-item cat-item-37"><a href="product/category?id=<?php echo $category['id'] ?>"><?php echo $category['name'] ?></a></li>
+						<li class="cat-item cat-item-37"><a href="<?php echo BASE_URL ."product/category?id=".$category['id'] ?>"><?php echo $category['name'] ?></a></li>
 					<?php
 					}
 					?>
@@ -66,7 +66,7 @@
 									</div>
 									<div class="image-tools grid-tools text-center hide-for-small bottom hover-slide-in show-on-hover">
 										<a rel="nofollow" id="<?php echo $product['id'] ?>" class="add_to_cart_button add-to-cart-grid no-padding" style="width:0;display:block;cursor: pointer;">
-											<div class="cart-icon tooltip absolute is-small tooltipstered"><strong>+</strong></div>
+											<div class="cart-icon "><strong>+</strong></div>
 										</a>
 										<?php
 										// check user đã mua sp hay chưa

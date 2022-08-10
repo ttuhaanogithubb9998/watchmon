@@ -1,5 +1,6 @@
 <?php
 // var_dump($hotProducts);
+// var_dump($user);
 $productImgFolder = 'upload/image/product/';
 
 ?>
@@ -319,7 +320,6 @@ $productImgFolder = 'upload/image/product/';
             <?php
             foreach ($hotProducts as $product) {
             ?>
-
                 <div class="col" data-animate="bounceInDown" style="position: absolute; left: 405px; top: 0px;" data-animated="true">
                     <div class="col-inner">
                         <?php
@@ -341,7 +341,6 @@ $productImgFolder = 'upload/image/product/';
                                     </a>
                                 </div>
                                 <div class="image-tools top right show-on-hover">
-                                    álifgiasydbfn
                                 </div>
                                 <div class="image-tools grid-tools text-center hide-for-small bottom hover-slide-in show-on-hover">
                                     <a rel="nofollow" id="<?php echo $product['id'] ?>" class="add_to_cart_button add-to-cart-grid no-padding" style="width:0;display:block;cursor: pointer;">
@@ -352,7 +351,7 @@ $productImgFolder = 'upload/image/product/';
                                     if (isset($user['carts'][0])) {
                                         $checkC  = false;
                                         foreach ($user['carts'] as $c) {
-                                            if(is_array($c)&&$c['productId']==$product['id']){
+                                            if (is_array($c) && $c['productId'] == $product['id']) {
                                                 $checkC = true;
                                                 break;
                                             }
@@ -360,7 +359,7 @@ $productImgFolder = 'upload/image/product/';
                                         if ($checkC) {
                                     ?>
                                             <div class='link-cart' style="width:100%">
-                                            <a href="/cart" class="added_to_cart wc-forward" title="Xem giỏ hàng">Xem giỏ hàng</a>
+                                                <a href="/cart" class="added_to_cart wc-forward" title="Xem giỏ hàng">Xem giỏ hàng</a>
                                             </div>
                                         <?php
                                         } else {
@@ -430,4 +429,3 @@ $productImgFolder = 'upload/image/product/';
 </section>
 
 <div class="gap-element" style="display:block; height:auto; padding-top:60px"></div>
-

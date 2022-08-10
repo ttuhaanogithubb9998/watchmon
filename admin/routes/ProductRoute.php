@@ -22,7 +22,7 @@ class ProductRoute extends BaseRoutes
                 return $this->productCtrl->getFromCreate();
             case preg_match('/^(\/edit)\?(id=)[0-9]{1,10}$/i', $this->path) != 0:
 
-                $productId = str_replace("/edit?id=", "", $this->path);
+                $productId = isset($_GET['id']) ? $_GET['id'] :"";
 
                 return $this->productCtrl->getFromEdit($productId);
             default:

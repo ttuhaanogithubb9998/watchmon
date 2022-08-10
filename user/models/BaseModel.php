@@ -48,35 +48,54 @@ class BaseModel extends Database
      
      * @param array $arrParams = [key => [value,typeFind], key => [value,typeFind], ...].
      * Vd :  $arrParams = ["id" => [1,"="], "name" => ["tuan","like"], ...]
+     * @param array $oderBy = [columnName => typeOderBy,...] . Sắp xếp theo cột tương ứng nếu truyền [] không sắp xếp.
      * 
      */
-    function search($selects = ["*"], $arrParams)
+    function search($selects = ["*"], $arrParams, $oderBy = [])
     {
         $columns = implode(', ', $selects);
-        $sql = "SELECT {$columns} FROM {$this->tableName} WHERE ";
         $arr = [];
+        $where = "";
 
         foreach ($arrParams as $key => [$value, $typeFind]) {
             if ($key != '' && $value != '') {
                 if (count($arr) > 0) {
-                    $sql .= " and ";
+                    $where .= " and ";
                 }
 
                 if ($typeFind == 'like') {
-                    $sql .= " $key " . ' like ' . ' ?';
-                    $arr[] = "%".$value."%";
+                    $where .= " $key " . ' like ' . ' ?';
+                    $arr[] = "%" . $value . "%";
                 } else {
-                    $sql .= $key . ' =' . ' ?';
+                    $where .= $key . ' =' . ' ?';
                     $arr[] = $value;
                 }
             }
         }
 
+        $oderByString = '';
+        if (count($oderBy) > 0) {
+            $oderByString = 'ORDER BY';
+            $length = strlen($oderByString);
+
+            foreach ($oderBy as $column => $type) {
+
+                if (strlen($oderByString) > $length) {
+                    $oderByString .= ", {$column} {$type}";
+                } else {
+                    $oderByString .= " {$column} {$type}";
+                }
+            }
+        }
+
+        
+        $sql = "SELECT {$columns} FROM {$this->tableName} WHERE {$where} {$oderByString} ";
+
 
         $stm = $this->pdo->prepare($sql);
         $stm->execute($arr);
-    //    var_dump($sql);
-    //    var_dump($arrParams);
+        //    var_dump($sql);
+        //    var_dump($arrParams);
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -91,14 +110,16 @@ class BaseModel extends Database
     {
         $set = '';
         $first = true;
+        $arr = [];
 
         foreach ($columnsUpdate as $column => $value) {
             if ($first) {
-                $set .= " $column = $value ";
+                $set .= " $column = ? ";
                 $first = false;
             } else {
-                $set  .= ", $column = $value ";
+                $set  .= ", $column = ? ";
             }
+            $arr[] = $value;
         }
 
 
@@ -106,11 +127,12 @@ class BaseModel extends Database
         $sql = "UPDATE $this->tableName 
         SET $set 
         WHERE id = $id ";
-
-        $stm = $this->pdo->query($sql);
+        
+        $stm = $this->pdo->prepare($sql);
+        $stm->execute($arr);
         return $stm->rowCount();
     }
-        /**
+    /**
      * insert dữ liệu
      * @param array $columnsInsert = [colum1 => value1,colum2 => value2,...]
      * @return int | false số dòng ảnh hưởng
@@ -124,7 +146,7 @@ class BaseModel extends Database
 
         foreach ($columnsInsert as $column => $value) {
             if ($first) {
-                
+
                 $columns .= " $column ";
                 $values  .= " ? ";
                 $arr = array_merge($arr, [$value]);
@@ -145,11 +167,11 @@ class BaseModel extends Database
         $values ";
 
 
-        try{
+        try {
             $stm = $this->pdo->prepare($sql);
-            $stm -> execute($arr);
+            $stm->execute($arr);
             return $stm->rowCount();
-        }catch(Exception $e) {
+        } catch (Exception $e) {
             $mes = $e->getMessage();
             var_dump($mes);
             var_dump($sql);
@@ -162,7 +184,7 @@ class BaseModel extends Database
      * @param array $arrParams = [key => [value,typeFind], key => [value,typeFind], ...].
      * Vd :  $arrParams = ["id" => [1,"="], "name" => ["tuan","like"], ...]
      */
-    function delete( $arrParams)
+    function delete($arrParams)
     {
         $sql = "DELETE FROM {$this->tableName} WHERE ";
         $arr = [];
@@ -191,7 +213,8 @@ class BaseModel extends Database
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function getCount(){
+    function getCount()
+    {
         $sql = "SELECT count(*) FROM {$this->tableName}";
         $stm = $this->pdo->query($sql);
 

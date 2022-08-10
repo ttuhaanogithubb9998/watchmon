@@ -1,16 +1,16 @@
+<?php
+// var_dump($user["carts"]);
+?>
 <div class="row row-main">
     <div class="large-12 col">
         <div class="col-inner">
-
-
-
             <div class="woocommerce">
-                <form action="" method="post">
+                <form action="<?php echo BASE_URL . 'cart/pay' ?>" method="post">
                     <div class="row pt-0 ">
                         <div class="large-7 col  ">
                             <h1 style="margin-top:50px">THÔNG TIN THANH TOÁN</h1>
 
-                            <form >
+                            <form>
                                 <div class="form-group">
                                     <label for="name">Tên</label>
                                     <input name="name" type="text" class="form-control" id="name" value="<?php echo $user['name'] ?>">
@@ -29,8 +29,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Ghi chú</label>
-                                    <textarea name="description" type="text" class="form-control" id="description">
-                                    </textarea>
+                                    <textarea name="description" type="text" class="form-control" id="description"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <p style="color:red; margin:auto;text-align:center;"><?php echo $message ?></p>
                                 </div>
                             </form>
 
@@ -50,26 +52,47 @@
                                                 <tr>
                                                     <th class="product-name">Sản phẩm</th>
                                                     <th class="product-total">Tổng</th>
-                                                </tr>   
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="cart_item">
-                                                    <td class="product-name">
-                                                        BIG BANG MXM18 SANG BLEU 39&nbsp; <strong class="product-quantity">× 1</strong> </td>
-                                                    <td class="product-total">
-                                                        <span class="woocommerce-Price-amount amount">739,370,000&nbsp;<span class="woocommerce-Price-currencySymbol">₫</span></span>
-                                                    </td>
-                                                </tr>
+                                                <?php
+                                                foreach ($user['carts'] as $cart) {
+
+                                                    if (is_array($cart)) {
+                                                ?>
+                                                        <tr class="cart_item">
+                                                            <td class="product-name">
+                                                                <?php echo $cart['product']['name']; ?>&nbsp;
+                                                                <strong class="product-quantity">× <?php echo $cart['quantity']; ?></strong>
+                                                            </td>
+                                                            <td class="product-total">
+                                                                <span class="woocommerce-Price-amount amount"><?php echo $cart['product']['price'] * $cart['quantity'] ?>&nbsp;<span class="woocommerce-Price-currencySymbol">₫</span></span>
+                                                            </td>
+                                                        </tr>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
                                             </tbody>
                                             <tfoot>
                                                 <tr class="cart-subtotal">
                                                     <th>Thành tiền</th>
-                                                    <td><span class="woocommerce-Price-amount amount">765,900,000&nbsp;<span class="woocommerce-Price-currencySymbol">₫</span></span></td>
+                                                    <td>
+                                                        <span class="woocommerce-Price-amount amount">
+                                                            <?php echo number_format($user['carts']['total'], 0, '.', ',') ?>&nbsp;
+                                                            <span class="woocommerce-Price-currencySymbol">₫</span>
+                                                            <input type='hidden' name='total' value='<?php echo $user['carts']['total'] ?>' />'
+                                                        </span>
+                                                    </td>
                                                 </tr>
                                             </tfoot>
                                         </table>
-
-                                        <button type="submit"> Thanh toán </button>
+                                        <div style="display:flex;justify-content: space-between;">
+                                            <button type="submit"> Thanh toán </button>
+                                            <a href="<?php echo BASE_URL . "cart" ?>">
+                                                <button style="background-color: #40b5be;color:white;" type="button">Giỏ hàng</button>
+                                            </a>
+                                        </div>
                                     </div>
 
                                     <div class="woocommerce-privacy-policy-text"></div>

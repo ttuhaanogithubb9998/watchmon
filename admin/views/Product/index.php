@@ -11,10 +11,17 @@ $actionUrl = 'admin/product/';
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between">
             <h5 class="mb-0">Products</h5>
-            <small class="text-muted float-end"><a href="<?php echo BASE_URL . $actionUrl . 'create'?>">New Product</a></small>
+            <small class="text-muted float-end"><a href="<?php echo BASE_URL . $actionUrl . 'create' ?>">New Product</a></small>
         </div>
+        <!-- Search -->
+        <div style="padding:10px" class="input-group input-group-merge">
+            <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
+            <input id="search" type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon-search31">
+        </div>
+        <!-- /Search -->
+
         <div class="table-responsive text-nowrap">
-            <table class="table">
+            <table  class="table">
                 <thead class="table-dark">
                     <tr>
                         <th>Name</th>
@@ -25,22 +32,22 @@ $actionUrl = 'admin/product/';
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody class="table-border-bottom-0">
+                <tbody  class="table-border-bottom-0">
                     <?php
                     foreach ($products as $product) {
                     ?>
                         <tr>
-                            <td><i class="fab fa-angular fa-lg text-danger me-0"></i> <strong><?php echo $product['name'] ?></strong></td>
+                            <td><i class="fab fa-angular fa-lg text-danger me-0"></i> <strong class="name"><?php echo $product['name'] ?></strong></td>
                             <td>
                                 <div class="card h-50 overflow-hidden">
-                                    <img style ="height:80px" src="<?php echo BASE_URL . $productImgFolder . $product['images'][0]['filename'] ?>" alt="Avatar"  />
+                                    <img style="height:80px" src="<?php echo BASE_URL . $productImgFolder . $product['images'][0]['filename'] ?>" alt="Avatar" />
                                 </div>
                             </td>
                             <td>
                                 <?php
                                 foreach ($product['categories'] as $category) {
                                 ?>
-                                    <div class=" me-4"><?php echo $category['name']; ?></div>
+                                    <div class="category me-4"><?php echo $category['name']; ?></div>
 
                                 <?php
                                 }
@@ -64,7 +71,6 @@ $actionUrl = 'admin/product/';
                     <?php
                     }
                     ?>
-                    <tr style="height:100px"></tr>
                 </tbody>
 
             </table>
@@ -72,3 +78,33 @@ $actionUrl = 'admin/product/';
     </div>
 
 </div>
+
+<script type="text/javascript">
+    let search = document.getElementById('search');
+    console.log(search);
+    search.onkeyup = function() {
+
+        let textFind = this.value.toUpperCase();
+        let trs = document.querySelectorAll('tbody tr');
+        trs.forEach((tr) => {
+            let name = tr.querySelector('tbody tr .name').innerText;
+            let string = name+' ';
+            let categories = tr.querySelectorAll('tbody tr .category');
+
+            categories.forEach((c) => {
+                string += c.innerText+' ';
+            })
+
+            if(string.toUpperCase().indexOf(textFind)!=-1){
+                tr.style.display = 'table-row'
+            }else{
+                tr.style.display = 'none'
+            }
+
+            
+            // console.log(textFind)
+
+        })
+
+    }
+</script>

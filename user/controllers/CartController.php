@@ -4,8 +4,11 @@ class CartController extends BaseController
     private $cartModel;
     function __construct()
     {
+        parent::__construct();
         $this->loadModel('Cart');
         $this->loadModel('Product');
+        $this->loadModel('Invoice');
+        $this->loadModel('InvoiceDetail');
         $this->cartModel = new Cart();
     }
     function checkLogged()
@@ -13,7 +16,7 @@ class CartController extends BaseController
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        if (!isset($_SESSION['user'])) {
+        if (!isset($_SESSION['user']['id'])) {
             $baseUrl = BASE_URL;
             header("Location: $baseUrl" . "user/login");
             exit();
@@ -34,10 +37,11 @@ class CartController extends BaseController
         return $this->view('Cart/index.php', []);
     }
 
-    function getFormOder()
+    function getFormOder($message = "")
     {
+        $this->checkLogged();
 
-        return $this->view('Cart/oder.php', []);
+        return $this->view('Cart/oder.php', ['message' => $message]);
     }
 
     /**
@@ -240,5 +244,54 @@ class CartController extends BaseController
         $baseUrl = BASE_URL;
         header("Location: $baseUrl" . "cart");
         exit();
+    }
+
+    function pay($name, $address, $email, $phone, $description,$total)
+    {
+        if (isset($this->dataLayout['user']['id'])) {
+
+            if ($name == '' || $address == '' || $email == '' || $phone == '' || $description == "") {
+                $message = "Vui lòng nhập đầy đủ thông tin!";
+                return $this->getFormOder($message);
+            }
+
+            $user = $this->dataLayout['user'];
+            $carts = $this->dataLayout['user']['carts'];
+
+            foreach ($carts as $cart) {
+
+                if (isset($cart['id']) && $cart['quantity'] > $cart['product']['stock']) {
+                    $message = "Một số sản phẩm trong kho đã hết xin vui lòng quay lại giỏ hàng để thay đổi";
+                    return $this->getFormOder($message);
+                }
+            }
+
+            $invoiceModel = new Invoice();
+            $invoiceDetailModel = new InvoiceDetail();
+            $invoice = $invoiceModel->add($user['id'], $name, $address, $email, $phone, $description,$total);
+
+            if (isset($invoice['id'])) {
+                foreach ($carts as $cart) {
+                    if (isset($cart['id'])) {
+                        $invoiceDetail =  $invoiceDetailModel->add($invoice['id'], $cart['product']['id'], $cart['quantity']);
+                        if (!$invoiceDetail) {
+                            $invoiceModel->remove($invoice['id']);
+                            $message = "lỗi hệ thống!";
+                            return $this->getFormOder($message);
+                        }
+                    }
+                }
+            } else {
+                $message = "lỗi hệ thống!";
+                return $this->getFormOder($message);
+            }
+            foreach ($carts as $cart) {
+                if (isset($cart['id'])) {
+                    $this->cartModel->remove($cart['id']);
+                }
+            }
+            $baseUrl = BASE_URL;
+            return Header("Location: {$baseUrl}user/invoice");
+        }
     }
 }

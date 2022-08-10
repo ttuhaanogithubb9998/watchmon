@@ -1,10 +1,10 @@
 <?php
 class BaseController
 {
-    const MODEL_ROOT = ROOT.'/admin/models/';
-    const LAYOUT = ROOT.'/admin/views/layout.php';
+    const MODEL_ROOT = ROOT . '/admin/models/';
+    const LAYOUT = ROOT . '/admin/views/layout.php';
 
-    
+
     /**
      * Load view 
      * @param $viewPath vd: Product/index.php (thuộc views)
@@ -12,14 +12,22 @@ class BaseController
      *  vd: ["product"=>$Product,"title"=>$title,...]
      * @param string path view layout
      */
-    function view($viewPath, $arrayData,$viewLayout = self::LAYOUT)
+    function view($viewPath, $arrayData, $viewLayout = self::LAYOUT)
     {
         // tạo biến để truy xuất từ view
         foreach ($arrayData as $key => $value) {
             $$key = $value;
         }
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $this->loadModel('User');
+        $userModel = new User();
 
-        $viewAction =$viewPath;
+        $user = $userModel->getUserById($_SESSION['user']['id']);
+        
+
+        $viewAction = $viewPath;
         require_once($viewLayout);
     }
 
@@ -36,8 +44,4 @@ class BaseController
     {
         require_once(ROOT . '/admin/views/notFound.php');
     }
-
-    
-
-
 }

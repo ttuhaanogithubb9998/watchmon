@@ -33,26 +33,33 @@ class Cart extends BaseModel
         if (count($result) > 0) return $result;
         return [];
     }
-    function getCartsByUserAndProduct($userId,$productId)
+    function getCartsByUserAndProduct($userId, $productId)
     {
         // var_dump($productId);
-        $result =  $this->search(["*"], ['userId' => [$userId, '='],"productId"=>[$productId,"="]]);
+        $result =  $this->search(["*"], ['userId' => [$userId, '='], "productId" => [$productId, "="]]);
         if (count($result) > 0) return $result;
         return [];
     }
-    
 
-    function add($userId,$productId,$quantity){
-        return $this->insert([
-            "userId"=>$userId, 
-            "productId"=>$productId,
-            "quantity" =>$quantity]
+
+    function add($userId, $productId, $quantity)
+    {
+        return $this->insert(
+            [
+                "userId" => $userId,
+                "productId" => $productId,
+                "quantity" => $quantity
+            ]
         );
     }
 
-    function changeQuantity($quantity,$cartId){
-        return $this->update(['quantity'=>$quantity],$cartId);
-        
+    function changeQuantity($quantity, $cartId)
+    {
+        return $this->update(['quantity' => $quantity], $cartId);
     }
-    
+
+    function remove($cartId)
+    {
+        $this->delete(['id' => [$cartId, '=']]);
+    }
 }

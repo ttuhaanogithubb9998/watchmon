@@ -1,6 +1,5 @@
 <?php
-  $user = $_SESSION['user'];
-  $pathImage = 'upload/image/user/'
+$pathImage = 'upload/image/user/'
 ?>
 <!DOCTYPE html>
 
@@ -21,7 +20,7 @@
   class="light-style layout-menu-fixed"
   dir="ltr"
   data-theme="theme-default"
-  data-assets-path="<?php echo BASE_URL?>/admin/assets/"
+  data-assets-path="<?php echo BASE_URL ?>/admin/assets/"
   data-template="vertical-menu-template-free"
 >
   <head>
@@ -36,7 +35,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?php echo BASE_URL?>/admin/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="<?php echo BASE_URL ?>/admin/assets/img/favicon/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,24 +46,24 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="<?php echo BASE_URL?>/admin/assets/vendor/fonts//boxicons.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>/admin/assets/vendor/fonts//boxicons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="<?php echo BASE_URL?>/admin/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL?>/admin/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL?>/admin/assets/css/demo.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>/admin/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>/admin/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>/admin/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="<?php echo BASE_URL?>/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="<?php echo BASE_URL?>/admin/assets/vendor/js/helpers.js"></script>
+    <script src="<?php echo BASE_URL ?>/admin/assets/vendor/js/helpers.js"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="<?php echo BASE_URL?>/admin/assets/js/config.js"></script>
+    <script src="<?php echo BASE_URL ?>/admin/assets/js/config.js"></script>
     <style>
       
     </style>
@@ -78,7 +77,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="<?php echo BASE_URL . 'admin' ?>" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -147,7 +146,7 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item">
-              <a href="index.html" class="menu-link">
+              <a href="<?php echo BASE_URL . 'admin' ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
@@ -162,20 +161,25 @@
 
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="<?php echo BASE_URL?>admin/user" class="menu-link">
+                  <a href="<?php echo BASE_URL ?>admin/user" class="menu-link">
                     <div data-i18n="Without menu">User</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="<?php echo BASE_URL?>admin/product" class="menu-link">
+                  <a href="<?php echo BASE_URL ?>admin/product" class="menu-link">
                     <div data-i18n="Without navbar">Product</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="<?php echo BASE_URL ?>admin/invoice" class="menu-link">
+                    <div data-i18n="Without navbar">Invoice</div>
                   </a>
                 </li>
               </ul>
             </li>
 
             
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div data-i18n="Account Settings">Account Settings</div>
@@ -198,7 +202,7 @@
                 </li>
               </ul>
             </li>
-
+ -->
           </ul>
         </aside>
         <!-- / Menu -->
@@ -219,7 +223,7 @@
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
-              <div class="navbar-nav align-items-center">
+              <!-- <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search fs-4 lh-0"></i>
                   <input
@@ -229,12 +233,12 @@
                     aria-label="Search..."
                   />
                 </div>
-              </div>
+              </div> -->
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
-                <li class="nav-item lh-1 me-3">
+                <!-- <li class="nav-item lh-1 me-3">
                   <a
                     class="github-button"
                     href="https://github.com/themeselection/sneat-html-admin-template-free"
@@ -244,40 +248,40 @@
                     aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
                     >Star</a
                   >
-                </li>
+                </li> -->
 
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="<?php echo BASE_URL.$pathImage.$user['image']?>" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="<?php echo BASE_URL . $pathImage . $user['image'] ?>" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="<?php echo BASE_URL.'admin/user/edit?id='.$user['id']  ?>">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="<?php echo BASE_URL.$pathImage.$user['image']?>" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="<?php echo BASE_URL . $pathImage . $user['image'] ?>" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block"><?php echo $user['name']?></span>
+                            <span class="fw-semibold d-block"><?php echo $user['name'] ?></span>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
                       </a>
                     </li>
-                    <li>
+                    <!-- <li>
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="<?php echo BASE_URL."admin/user?id=".$user['id'] ?>">
+                      <a class="dropdown-item" href="<?php echo BASE_URL . "admin/user?id=" . $user['id'] ?>">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
-                    </li>
+                    </li> -->
                     
                     <li>
                       <div class="dropdown-divider"></div>
@@ -325,19 +329,19 @@
 
 
     <!-- Core JS -->
-    <!-- build:js <?php echo BASE_URL?>/admin/assets/vendor/js/core.js -->
-    <script src="<?php echo BASE_URL?>/admin/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="<?php echo BASE_URL?>/admin/assets/vendor/libs/popper/popper.js"></script>
-    <script src="<?php echo BASE_URL?>/admin/assets/vendor/js/bootstrap.js"></script>
-    <script src="<?php echo BASE_URL?>/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <!-- build:js <?php echo BASE_URL ?>/admin/assets/vendor/js/core.js -->
+    <script src="<?php echo BASE_URL ?>/admin/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="<?php echo BASE_URL ?>/admin/assets/vendor/libs/popper/popper.js"></script>
+    <script src="<?php echo BASE_URL ?>/admin/assets/vendor/js/bootstrap.js"></script>
+    <script src="<?php echo BASE_URL ?>/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="<?php echo BASE_URL?>/admin/assets/vendor/js/menu.js"></script>
+    <script src="<?php echo BASE_URL ?>/admin/assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
 
     <!-- Main JS -->
-    <script src="<?php echo BASE_URL?>/admin/assets/js/main.js"></script>
+    <script src="<?php echo BASE_URL ?>/admin/assets/js/main.js"></script>
 
     <!-- Page JS -->
 

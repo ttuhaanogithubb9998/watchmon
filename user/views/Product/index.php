@@ -14,7 +14,7 @@
 					<?php
 					foreach ($categories as $category) {
 					?>
-						<li class="cat-item cat-item-37"><a href="product/category?id=<?php echo $category['id'] ?>"><?php echo $category['name'] ?></a></li>
+						<li class="cat-item cat-item-37"><a href="<?php echo BASE_URL ."product/category?id=".$category['id'] ?>"><?php echo $category['name'] ?></a></li>
 					<?php
 					}
 					?>
@@ -49,7 +49,7 @@
 							<div class="product-small box ">
 								<div class="box-image">
 									<div class="image-fade_in_back">
-										<a href="<?php echo BASE_URL . 'product/?id=' . $product['id']; ?>">
+										<a href="<?php echo BASE_URL . 'product/detail?id=' . $product['id']; ?>">
 											<img width="480" height="480" src="<?php echo BASE_URL . $productImgFolder . $product['images'][0]['filename'] ?>" />
 											<?php
 											if (isset($product['images'][1])) {
@@ -66,7 +66,7 @@
 									</div>
 									<div class="image-tools grid-tools text-center hide-for-small bottom hover-slide-in show-on-hover">
 										<a rel="nofollow" id="<?php echo $product['id'] ?>" class="add_to_cart_button add-to-cart-grid no-padding" style="width:0;display:block;cursor: pointer;">
-											<div class="cart-icon tooltip absolute is-small tooltipstered"><strong>+</strong></div>
+											<div class="cart-icon "><strong>+</strong></div>
 										</a>
 										<?php
 										// check user đã mua sp hay chưa
@@ -99,7 +99,7 @@
 								<div class="box-text text-center">
 									<div class="title-wrapper">
 										<p class="name product-title">
-											<a href="<?php echo BASE_URL . 'product/?id=' . $product['id'] ?>">
+											<a href="<?php echo BASE_URL . 'product/detail?id=' . $product['id'] ?>">
 												<?php echo $product['name'] ?>
 											</a>
 										</p>

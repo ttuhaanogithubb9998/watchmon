@@ -4,22 +4,16 @@ class User extends BaseModel
     const TABLE_NAME = 'user';
     const SECRET_KEY = "my-secret-key";
     const TYPE_ENCRYPT = "aes128";
-    private $iv;
+    private $iv = "qwertyuiopasdfgh";
 
     function __construct()
     {
         parent::__construct(self::TABLE_NAME);
-        $iv_length = openssl_cipher_iv_length(self::TYPE_ENCRYPT);
-        $iv = openssl_random_pseudo_bytes($iv_length);
-        $this->iv = $iv;
+        
     }
 
 
-    function getAll()
-    {
-
-        return $this->all();
-    }
+    
     function getLogin($userName, $password)
     {
         $password = md5($password);
@@ -35,7 +29,7 @@ class User extends BaseModel
             $user['phone'] = openssl_decrypt($user['phone'], self::TYPE_ENCRYPT, self::SECRET_KEY, 0, $this->iv);
             $user['email'] = openssl_decrypt($user['email'], self::TYPE_ENCRYPT, self::SECRET_KEY, 0, $this->iv);
             $user['address'] = openssl_decrypt($user['address'], self::TYPE_ENCRYPT, self::SECRET_KEY, 0, $this->iv);
-           
+
             return $user;
         }
         return false;
@@ -82,4 +76,50 @@ class User extends BaseModel
         $message = "Lỗi ! Thất bại!";
         return   ['user' => '', "status" => false, "message" => $message];
     }
+
+
+    /**
+     * 
+     */
+    function edit($userId, $password, $name, $address, $email, $phone)
+    {
+        
+        $password = md5($password);
+        $phone =  openssl_encrypt($phone, self::TYPE_ENCRYPT, self::SECRET_KEY, 0, $this->iv);
+        $email =  openssl_encrypt($email, self::TYPE_ENCRYPT, self::SECRET_KEY, 0, $this->iv);
+        $address =  openssl_encrypt($address, self::TYPE_ENCRYPT, self::SECRET_KEY, 0, $this->iv);
+
+       
+
+        $update = $this->update([
+
+            "password" => $password,
+            "name" => $name,
+            "address" => $address,
+            "phone" => $phone,
+            "email" => $email
+        ], $userId);
+        if ($update > 0) {
+            $user = $this->search(["*"], ["id" => [$userId, "="]])[0];
+            $user['phone'] = openssl_decrypt($user['phone'], self::TYPE_ENCRYPT, self::SECRET_KEY, 0, $this->iv);
+            $user['email'] = openssl_decrypt($user['email'], self::TYPE_ENCRYPT, self::SECRET_KEY, 0, $this->iv);
+            $user['address'] = openssl_decrypt($user['address'], self::TYPE_ENCRYPT, self::SECRET_KEY, 0, $this->iv);
+            $message = "Thành công!";
+            return   ['user' => $user, "status" => true, "message" => $message];
+        }
+        $message = "Lỗi ! Thất bại!";
+        return   ['user' => '', "status" => false, "message" => $message];
+    }
+
+
+
+    function getUserById($userId){
+
+        $user =  $this->search(['*'],['id'=>[$userId,'=']])[0];
+        $user['phone'] = openssl_decrypt($user['phone'], self::TYPE_ENCRYPT, self::SECRET_KEY, 0, $this->iv);
+        $user['email'] = openssl_decrypt($user['email'], self::TYPE_ENCRYPT, self::SECRET_KEY, 0, $this->iv);
+        $user['address'] = openssl_decrypt($user['address'], self::TYPE_ENCRYPT, self::SECRET_KEY, 0, $this->iv);
+        return $user;
+    }
+
 }

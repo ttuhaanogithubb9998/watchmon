@@ -6,7 +6,7 @@ class ProductController extends BaseController
     {
         $this->loadModel('Product');
         $this->loadModel("ProductCategory");
-        $this->loadModel("SubImage");
+        $this->loadModel("Subimage");
         $this->loadModel("Category");
         $this->productModel = new Product();
     }
@@ -131,16 +131,6 @@ class ProductController extends BaseController
 
 
 
-    /**
-     * 
-     */
-    function removeStock($productId)
-    {
-
-        $this->productModel->removeStock($productId, 1);
-
-        return '"[{"productId":"asdf"}]"';
-    }
 
     /**
      * 

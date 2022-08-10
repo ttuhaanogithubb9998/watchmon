@@ -4,6 +4,7 @@ class ProductController extends BaseController
     private $productModel;
     function __construct()
     {
+        parent::__construct();
         $this->loadModel("Product");
         $this->loadModel("Category");
         $this->loadModel("ProductCategory");

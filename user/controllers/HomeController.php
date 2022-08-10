@@ -5,6 +5,7 @@ class HomeController extends BaseController
 
     function __construct()
     {
+        parent::__construct();
         $this->loadModel("Product");
         $this->loadModel("Category");
         $this->loadModel("ProductCategory");

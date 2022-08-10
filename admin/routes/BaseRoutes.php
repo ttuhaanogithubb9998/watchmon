@@ -15,7 +15,7 @@ abstract class BaseRoutes
 
     function run($path)
     {
-        
+
         $this->checkLogged();
 
 
@@ -42,12 +42,11 @@ abstract class BaseRoutes
     function checkLogged()
     {
         session_start();
-        if (!isset($_SESSION['user'])) {
-            if($_SESSION['user']['isAdmin']==0){
-                $baseUrl = BASE_URL;
-                header("Location: $baseUrl"."admin/login");
-                exit();
-            }
+        if (!isset($_SESSION['user']) || $_SESSION['user']['isAdmin'] == 0) {
+
+            $baseUrl = BASE_URL;
+            header("Location: $baseUrl" . "admin/login");
+            exit();
         }
     }
 }

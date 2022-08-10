@@ -46,11 +46,13 @@ $productImgFolder = 'upload/image/product/';
                     }
                     ?>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <a style="background: linear-gradient(90deg, #ca992c, transparent);" class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true">
+                        <div></div>
+                    </span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <a  style="background: linear-gradient(270deg, #ca992c, transparent);" class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
@@ -75,12 +77,12 @@ $productImgFolder = 'upload/image/product/';
             </div>
 
             <?php
-            if ($product['stock'] > 1&&$product['state']==1) {
+            if ($product['stock'] > 1 && $product['state'] == 1) {
             ?>
                 <form class="cart" action="<?php echo BASE_URL . "cart/addMulti" ?>" method="post" enctype="multipart/form-data">
                     <div class="quantity buttons_added">
                         <input type="button" value="-" class="minus button is-form">
-                        <input type="number" id="quantity_62ea71e29a9b6" class="input-text qty text" step="1" min="1" max="<?php echo $product['stock']?>" name="quantity" value="1" title="SL" size="4" pattern="[0-9]*" inputmode="numeric" aria-labelledby="">
+                        <input type="number" id="quantity_62ea71e29a9b6" class="input-text qty text" step="1" min="1" max="<?php echo $product['stock'] ?>" name="quantity" value="1" title="SL" size="4" pattern="[0-9]*" inputmode="numeric" aria-labelledby="">
                         <input type="button" value="+" class="plus button is-form">
                         <input type="hidden" name="productId" value="<?php echo $product['id'] ?>" />
                     </div>
